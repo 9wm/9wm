@@ -1,5 +1,6 @@
 /* Copyright (c) 1994-1996 David Hogan, see README for licence details */
 #include <stdio.h>
+#include <stdlib.h>
 #include <X11/X.h>
 #include <X11/Xos.h>
 #include <X11/Xlib.h>
@@ -50,7 +51,7 @@ int mapped;
 
 	/* Figure out what to do with the window from hints */
 
-	if (!getstate(c->window, &state))
+	if (!getwstate(c->window, &state))
 		state = hints ? hints->initial_state : NormalState;
 	dohide = (state == IconicState);
 
@@ -135,7 +136,7 @@ int mapped;
 			active(c);
 		else
 			setactive(c, 0);
-		setstate(c, NormalState);
+		setwstate(c, NormalState);
 	}
 	if (current && (current != c))
 		cmapfocus(current);
@@ -195,7 +196,7 @@ Client *c;
 	XReparentWindow(dpy, c->window, c->screen->root, c->x, c->y);
 	gravitate(c, 0);
 	XRemoveFromSaveSet(dpy, c->window);
-	setstate(c, WithdrawnState);
+	setwstate(c, WithdrawnState);
 
 	/* flush any errors */
 	ignore_badwindow = 1;
@@ -254,7 +255,7 @@ int invert;
 		dy = 2*delta;
 		break;
 	default:
-		fprintf(stderr, "9wm: bad window gravity %d for 0x%x\n", gravity, c->window);
+		fprintf(stderr, "9wm: bad window gravity %d for 0x%x\n", gravity, (int)c->window);
 		return;
 	}
 	dx += BORDER;
@@ -432,7 +433,7 @@ Atom type;
 		return 0;
 	x = *p;
 	XFree((void*) p);
-	return (int)x;
+	return (int)((unsigned long int)x);
 }
 
 Window
@@ -452,7 +453,7 @@ Atom a;
 }
 
 void
-setstate(c, state)
+setwstate(c, state)
 Client *c;
 int state;
 {
@@ -467,7 +468,7 @@ int state;
 }
 
 int
-getstate(w, state)
+getwstate(w, state)
 Window w;
 int *state;
 {

@@ -1,6 +1,10 @@
 /* Copyright (c) 1994-1996 David Hogan, see README for licence details */
 #include <stdio.h>
 #include <signal.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 #include <X11/X.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
@@ -114,12 +118,12 @@ ScreenInfo *s;
 			if (s->display[0] != '\0')
 				putenv(s->display);
 			if (termprog != NULL) {
-				execl(shell, shell, "-c", termprog, 0);
+				execl(shell, shell, "-c", termprog, NULL);
 				fprintf(stderr, "9wm: exec %s", shell);
 				perror(" failed");
 			}
-			execlp("9term", "9term", "-9wm", 0);
-			execlp("xterm", "xterm", "-ut", 0);
+			execlp("9term", "9term", "-9wm", NULL);
+			execlp("xterm", "xterm", "-ut", NULL);
 			perror("9wm: exec 9term/xterm failed");
 			exit(1);
 		}
@@ -191,7 +195,7 @@ Client *c;
 	}
 	XUnmapWindow(dpy, c->parent);
 	XUnmapWindow(dpy, c->window);
-	setstate(c, IconicState);
+	setwstate(c, IconicState);
 	if (c == current)
 		nofocus();
 	hiddenc[numhidden] = c;
@@ -215,14 +219,14 @@ int map;
 	c = hiddenc[n];
 	if (!hidden(c)) {
 		fprintf(stderr, "9wm: unhide: not hidden: %s(0x%x)\n",
-			c->label, c->window);
+			c->label, (int)c->window);
 		return;
 	}
 
 	if (map) {
 		XMapWindow(dpy, c->window);
 		XMapRaised(dpy, c->parent);
-		setstate(c, NormalState);
+		setwstate(c, NormalState);
 		active(c);
 		top(c);
 	}
@@ -248,7 +252,7 @@ int map;
 			return;
 		}
 	fprintf(stderr, "9wm: unhidec: not hidden: %s(0x%x)\n",
-		c->label, c->window);
+		c->label, (int)c->window);
 }
 
 void

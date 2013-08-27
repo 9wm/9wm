@@ -1,5 +1,6 @@
 /* Copyright (c) 1994-1996 David Hogan, see README for licence details */
 #include <stdio.h>
+#include <stdlib.h>
 #include <X11/X.h>
 #include <X11/Xos.h>
 #include <X11/Xlib.h>
@@ -175,8 +176,8 @@ XMapRequestEvent *e;
 
 	if (c == 0 || c->window != e->window) {
 		/* workaround for stupid NCDware */
-		fprintf(stderr, "9wm: bad mapreq c %x w %x, rescanning\n",
-			c, e->window);
+		fprintf(stderr, "9wm: bad mapreq c %p w %x, rescanning\n",
+			c, (int)e->window);
 		for (i = 0; i < num_screens; i++)
 			scanwins(&screens[i]);
 		c = getclient(e->window, 0);
@@ -200,7 +201,7 @@ XMapRequestEvent *e;
 		XMapWindow(dpy, c->window);
 		XMapRaised(dpy, c->parent);
 		top(c);
-		setstate(c, NormalState);
+		setwstate(c, NormalState);
 		if (c->trans != None && current && c->trans == current->window)
 				active(c);
 		break;
@@ -311,12 +312,12 @@ XClientMessageEvent *e;
 				hide(c);
 		}
 		else
-			fprintf(stderr, "9wm: WM_CHANGE_STATE: format %d data %d w 0x%x\n",
-				e->format, e->data.l[0], e->window);
+			fprintf(stderr, "9wm: WM_CHANGE_STATE: format %d data %ld w 0x%x\n",
+				e->format, e->data.l[0], (int)e->window);
 		return;
 	}
 	fprintf(stderr, "9wm: strange ClientMessage, type 0x%x window 0x%x\n",
-		e->message_type, e->window);
+		(int)e->message_type, (int)e->window);
 }
 
 void

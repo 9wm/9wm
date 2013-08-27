@@ -6,7 +6,7 @@
 # if you're using AIX, add "-D_BSD -D_BSD_INCLUDES" to "CFLAGS".
 #
 
-CFLAGS = -g -DSHAPE
+CFLAGS = -g -DSHAPE -Wall -Werror
 LDFLAGS = -lXext -lX11
 BIN = /usr/bin/X11
 
