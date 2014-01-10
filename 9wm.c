@@ -1,4 +1,4 @@
-/* Copyright (c) 1994-1996 David Hogan, see README for licence details */
+/* Copyright (c) 2014 Neale Pickett, see README for licence details */
 #include <stdio.h>
 #include <signal.h>
 #include <errno.h>
@@ -15,7 +15,7 @@
 
 char	*version[] =
 {
-	"9wm version 1.2, Copyright (c) 1994-1996 David Hogan", 0,
+	"9wm version 1.3, Copyright (c) 2014 Neale Pickett", 0,
 };
 
 Display 		*dpy;

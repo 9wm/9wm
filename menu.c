@@ -1,4 +1,4 @@
-/* Copyright (c) 1994-1996 David Hogan, see README for licence details */
+/* Copyright (c) 2014 Neale Pickett, see README for licence details */
 #include <stdio.h>
 #include <signal.h>
 #include <unistd.h>
