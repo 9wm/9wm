@@ -7,7 +7,7 @@
 #
 
 CFLAGS = -g -DSHAPE -Wall -Werror
-LDFLAGS = -lXext -lX11
+LDLIBS = -lXext -lX11
 BIN = /usr/bin/X11
 
 MANDIR = /usr/man/man1
@@ -17,7 +17,7 @@ MANSUFFIX = 1
 # These variables shouldn't need to be changed
 #
 
-OBJS = main.o event.o manage.o menu.o client.o grab.o cursor.o error.o
+OBJS = 9wm.o event.o manage.o menu.o client.o grab.o cursor.o error.o
 HFILES = dat.h fns.h
 
 #
@@ -27,7 +27,6 @@ HFILES = dat.h fns.h
 all: 9wm
 
 9wm: $(OBJS)
-	$(CC) $(CFLAGS) -o 9wm $(OBJS) $(LDFLAGS)
 
 install: 9wm
 	cp 9wm $(BIN)/9wm
