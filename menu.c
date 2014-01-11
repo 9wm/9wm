@@ -108,28 +108,20 @@ void
 spawn(s)
 ScreenInfo *s;
 {
-	/*
-	 * ugly dance to avoid leaving zombies.  Could use SIGCHLD,
-	 * but it's not very portable.
-	 */
 	if (fork() == 0) {
-		if (fork() == 0) {
-			close(ConnectionNumber(dpy));
-			if (s->display[0] != '\0')
-				putenv(s->display);
-			if (termprog != NULL) {
-				execl(shell, shell, "-c", termprog, NULL);
-				fprintf(stderr, "9wm: exec %s", shell);
-				perror(" failed");
-			}
-			execlp("9term", "9term", "-9wm", NULL);
-			execlp("xterm", "xterm", "-ut", NULL);
-			perror("9wm: exec 9term/xterm failed");
-			exit(1);
+		close(ConnectionNumber(dpy));
+		if (s->display[0] != '\0')
+			putenv(s->display);
+		if (termprog != NULL) {
+			execl(shell, shell, "-c", termprog, NULL);
+			fprintf(stderr, "9wm: exec %s", shell);
+			perror(" failed");
 		}
-		exit(0);
+		execlp("9term", "9term", "-9wm", NULL);
+		execlp("xterm", "xterm", "-ut", NULL);
+		perror("9wm: exec 9term/xterm failed");
+		exit(1);
 	}
-	wait((int *) 0);
 }
 
 void

@@ -3,6 +3,7 @@
 #include <signal.h>
 #include <errno.h>
 #include <stdlib.h>
+#include <sys/wait.h>
 #include <X11/X.h>
 #include <X11/Xos.h>
 #include <X11/Xlib.h>
@@ -54,6 +55,12 @@ char	*fontlist[] = {
 	"*",
 	0,
 };
+
+void
+sigchld(int signum)
+{
+	while (0 < waitpid(-1, NULL, WNOHANG));
+}
 
 void
 usage()
@@ -127,6 +134,7 @@ char *argv[];
 		signal(SIGINT, SIG_IGN);
 	if (signal(SIGHUP, sighandler) == SIG_IGN)
 		signal(SIGHUP, SIG_IGN);
+	signal(SIGCHLD, sigchld);
 
 	exit_9wm = XInternAtom(dpy, "9WM_EXIT", False);
 	restart_9wm = XInternAtom(dpy, "9WM_RESTART", False);
