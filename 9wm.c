@@ -372,12 +372,16 @@ XEvent *e;
 			return;
 		}
 		XFlush(dpy);
-		FD_SET(fd, &rfds);
-		if (select(fd+1, &rfds, NULL, NULL, NULL) == 1) {
-			XNextEvent(dpy, e);
-			return;
-		}
-		if (errno != EINTR || !signalled) {
+
+		do {
+			FD_ZERO(&rfds);
+			FD_SET(fd, &rfds);
+			if (select(fd+1, &rfds, NULL, NULL, NULL) == 1) {
+				XNextEvent(dpy, e);
+				return;
+			}
+		} while (errno == EINTR);
+		if (!signalled) {
 			perror("9wm: select failed");
 			exit(1);
 		}
