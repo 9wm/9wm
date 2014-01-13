@@ -117,9 +117,8 @@ ScreenInfo *s;
 			fprintf(stderr, "9wm: exec %s", shell);
 			perror(" failed");
 		}
-		execlp("9term", "9term", "-9wm", NULL);
-		execlp("xterm", "xterm", "-ut", NULL);
-		perror("9wm: exec 9term/xterm failed");
+		execlp("xterm", "xterm", NULL);
+		perror("9wm: exec xterm failed");
 		exit(1);
 	}
 }
