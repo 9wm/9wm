@@ -1,4 +1,6 @@
-/* Copyright (c) 2014 multiple authors, see README for licence details */
+/*
+ * Copyright (c) 2014 multiple authors, see README for licence details 
+ */
 #include <stdio.h>
 #include <signal.h>
 #include <unistd.h>
@@ -11,12 +13,11 @@
 #include "dat.h"
 #include "fns.h"
 
-Client	*hiddenc[MAXHIDDEN];
+Client         *hiddenc[MAXHIDDEN];
 
-int	numhidden;
+int             numhidden;
 
-char	*b3items[B3FIXED+MAXHIDDEN+1] =
-{
+char           *b3items[B3FIXED + MAXHIDDEN + 1] = {
 	"New",
 	"Reshape",
 	"Move",
@@ -25,24 +26,22 @@ char	*b3items[B3FIXED+MAXHIDDEN+1] =
 	0,
 };
 
-Menu	b3menu =
-{
+Menu            b3menu = {
 	b3items,
 };
 
-Menu	egg =
-{
+Menu            egg = {
 	version,
 };
 
 void
 button(e)
-XButtonEvent *e;
+     XButtonEvent   *e;
 {
-	int n, shift;
-	Client *c;
-	Window dw;
-	ScreenInfo *s;
+	int             n, shift;
+	Client         *c;
+	Window          dw;
+	ScreenInfo     *s;
 
 	curtime = e->time;
 	s = getscreen(e->root);
@@ -52,10 +51,8 @@ XButtonEvent *e;
 	if (c) {
 		e->x += c->x - BORDER + 1;
 		e->y += c->y - BORDER + 1;
-	}
-	else if (e->window != e->root)
-		XTranslateCoordinates(dpy, e->window, s->root, e->x, e->y,
-				&e->x, &e->y, &dw);
+	} else if (e->window != e->root)
+		XTranslateCoordinates(dpy, e->window, s->root, e->x, e->y, &e->x, &e->y, &dw);
 	switch (e->button) {
 	case Button1:
 		if (c) {
@@ -65,7 +62,7 @@ XButtonEvent *e;
 		}
 		return;
 	case Button2:
-		if ((e->state&(ShiftMask|ControlMask))==(ShiftMask|ControlMask))
+		if ((e->state & (ShiftMask | ControlMask)) == (ShiftMask | ControlMask))
 			menuhit(e, &egg);
 		return;
 	default:
@@ -77,27 +74,27 @@ XButtonEvent *e;
 	if (current && current->screen == s)
 		cmapnofocus(s);
 	switch (n = menuhit(e, &b3menu)) {
-	case 0: 	/* New */
+	case 0:		/* New */
 		spawn(s);
 		break;
-	case 1: 	/* Reshape */
+	case 1:		/* Reshape */
 		reshape(selectwin(1, 0, s));
 		break;
-	case 2: 	/* Move */
+	case 2:		/* Move */
 		move(selectwin(0, 0, s));
 		break;
-	case 3: 	/* Delete */
+	case 3:		/* Delete */
 		shift = 0;
 		c = selectwin(1, &shift, s);
 		delete(c, shift);
 		break;
-	case 4: 	/* Hide */
+	case 4:		/* Hide */
 		hide(selectwin(1, 0, s));
 		break;
-	default:	/* unhide window */
+	default:		/* unhide window */
 		unhide(n - B3FIXED, 1);
 		break;
-	case -1:	/* nothing */
+	case -1:		/* nothing */
 		break;
 	}
 	if (current && current->screen == s)
@@ -106,7 +103,7 @@ XButtonEvent *e;
 
 void
 spawn(s)
-ScreenInfo *s;
+     ScreenInfo     *s;
 {
 	if (fork() == 0) {
 		close(ConnectionNumber(dpy));
@@ -126,9 +123,9 @@ ScreenInfo *s;
 
 void
 reshape(c)
-Client *c;
+     Client         *c;
 {
-	int odx, ody;
+	int             odx, ody;
 
 	if (c == 0)
 		return;
@@ -139,17 +136,16 @@ Client *c;
 	active(c);
 	top(c);
 	XRaiseWindow(dpy, c->parent);
-	XMoveResizeWindow(dpy, c->parent, c->x-BORDER, c->y-BORDER,
-					c->dx+2*(BORDER-1), c->dy+2*(BORDER-1));
+	XMoveResizeWindow(dpy, c->parent, c->x - BORDER, c->y - BORDER, c->dx + 2 * (BORDER - 1), c->dy + 2 * (BORDER - 1));
 	if (c->dx == odx && c->dy == ody)
 		sendconfig(c);
 	else
-		XMoveResizeWindow(dpy, c->window, BORDER-1, BORDER-1, c->dx, c->dy);
+		XMoveResizeWindow(dpy, c->window, BORDER - 1, BORDER - 1, c->dx, c->dy);
 }
 
 void
 move(c)
-Client *c;
+     Client         *c;
 {
 	if (c == 0)
 		return;
@@ -158,26 +154,26 @@ Client *c;
 	active(c);
 	top(c);
 	XRaiseWindow(dpy, c->parent);
-	XMoveWindow(dpy, c->parent, c->x-BORDER, c->y-BORDER);
+	XMoveWindow(dpy, c->parent, c->x - BORDER, c->y - BORDER);
 	sendconfig(c);
 }
 
 void
 delete(c, shift)
-Client *c;
-int shift;
+     Client         *c;
+     int             shift;
 {
 	if (c == 0)
 		return;
 	if ((c->proto & Pdelete) && !shift)
 		sendcmessage(c->window, wm_protocols, wm_delete, 0);
 	else
-		XKillClient(dpy, c->window);		/* let event clean up */
+		XKillClient(dpy, c->window);	/* let event clean up */
 }
 
 void
 hide(c)
-Client *c;
+     Client         *c;
 {
 	if (c == 0 || numhidden == MAXHIDDEN)
 		return;
@@ -191,18 +187,18 @@ Client *c;
 	if (c == current)
 		nofocus();
 	hiddenc[numhidden] = c;
-	b3items[B3FIXED+numhidden] = c->label;
+	b3items[B3FIXED + numhidden] = c->label;
 	numhidden++;
-	b3items[B3FIXED+numhidden] = 0;
+	b3items[B3FIXED + numhidden] = 0;
 }
 
 void
 unhide(n, map)
-int n;
-int map;
+     int             n;
+     int             map;
 {
-	Client *c;
-	int i;
+	Client         *c;
+	int             i;
 
 	if (n >= numhidden) {
 		fprintf(stderr, "9wm: unhide: n %d numhidden %d\n", n, numhidden);
@@ -210,8 +206,7 @@ int map;
 	}
 	c = hiddenc[n];
 	if (!hidden(c)) {
-		fprintf(stderr, "9wm: unhide: not hidden: %s(0x%x)\n",
-			c->label, (int)c->window);
+		fprintf(stderr, "9wm: unhide: not hidden: %s(0x%x)\n", c->label, (int) c->window);
 		return;
 	}
 
@@ -224,35 +219,34 @@ int map;
 	}
 
 	numhidden--;
-	for (i = n; i < numhidden; i ++) {
-		hiddenc[i] = hiddenc[i+1];
-		b3items[B3FIXED+i] = b3items[B3FIXED+i+1];
+	for (i = n; i < numhidden; i++) {
+		hiddenc[i] = hiddenc[i + 1];
+		b3items[B3FIXED + i] = b3items[B3FIXED + i + 1];
 	}
-	b3items[B3FIXED+numhidden] = 0;
+	b3items[B3FIXED + numhidden] = 0;
 }
 
 void
 unhidec(c, map)
-Client *c;
-int map;
+     Client         *c;
+     int             map;
 {
-	int i;
+	int             i;
 
 	for (i = 0; i < numhidden; i++)
 		if (c == hiddenc[i]) {
 			unhide(i, map);
 			return;
 		}
-	fprintf(stderr, "9wm: unhidec: not hidden: %s(0x%x)\n",
-		c->label, (int)c->window);
+	fprintf(stderr, "9wm: unhidec: not hidden: %s(0x%x)\n", c->label, (int) c->window);
 }
 
 void
 renamec(c, name)
-Client *c;
-char *name;
+     Client         *c;
+     char           *name;
 {
-	int i;
+	int             i;
 
 	if (name == 0)
 		name = "???";
@@ -261,7 +255,7 @@ char *name;
 		return;
 	for (i = 0; i < numhidden; i++)
 		if (c == hiddenc[i]) {
-			b3items[B3FIXED+i] = name;
+			b3items[B3FIXED + i] = name;
 			return;
 		}
 }

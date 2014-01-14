@@ -1,4 +1,6 @@
-/* Copyright (c) 2014 multiple authors, see README for licence details */
+/*
+ * Copyright (c) 2014 multiple authors, see README for licence details 
+ */
 #include <stdio.h>
 #include <signal.h>
 #include <errno.h>
@@ -14,39 +16,38 @@
 #include "fns.h"
 #include "patchlevel.h"
 
-char	*version[] =
-{
+char           *version[] = {
 	"9wm version 2.0, Copyright (c) 2014 multiple authors", 0,
 };
 
-Display 		*dpy;
-ScreenInfo	*screens;
-int 			initting;
-XFontStruct 	*font;
-int 			nostalgia;
-char			**myargv;
-char			*termprog;
-char			*shell;
-Bool			shape;
-int 			_border = 4;
-int 			_inset = 1;
-int 			curtime;
-int 			debug;
-int 			signalled;
-int 			num_screens;
+Display        *dpy;
+ScreenInfo     *screens;
+int             initting;
+XFontStruct    *font;
+int             nostalgia;
+char          **myargv;
+char           *termprog;
+char           *shell;
+Bool            shape;
+int             _border = 4;
+int             _inset = 1;
+int             curtime;
+int             debug;
+int             signalled;
+int             num_screens;
 
-Atom		exit_9wm;
-Atom		restart_9wm;
-Atom		wm_state;
-Atom		wm_change_state;
-Atom		wm_protocols;
-Atom		wm_delete;
-Atom		wm_take_focus;
-Atom		wm_colormaps;
-Atom		_9wm_running;
-Atom		_9wm_hold_mode;
+Atom            exit_9wm;
+Atom            restart_9wm;
+Atom            wm_state;
+Atom            wm_change_state;
+Atom            wm_protocols;
+Atom            wm_delete;
+Atom            wm_take_focus;
+Atom            wm_colormaps;
+Atom            _9wm_running;
+Atom            _9wm_hold_mode;
 
-char	*fontlist[] = {
+char           *fontlist[] = {
 	"lucm.latin1.9",
 	"blit",
 	"9x15bold",
@@ -71,14 +72,14 @@ usage()
 
 int
 main(argc, argv)
-int argc;
-char *argv[];
+     int             argc;
+     char           *argv[];
 {
-	int i, background, do_exit, do_restart;
-	char *fname;
-	int shape_event, dummy;
+	int             i, background, do_exit, do_restart;
+	char           *fname;
+	int             shape_event, dummy;
 
-	myargv = argv;			/* for restart */
+	myargv = argv;		/* for restart */
 
 	background = do_exit = do_restart = 0;
 	font = 0;
@@ -90,11 +91,10 @@ char *argv[];
 			background = 1;
 		else if (strcmp(argv[i], "-debug") == 0)
 			debug++;
-		else if (strcmp(argv[i], "-font") == 0 && i+1<argc) {
+		else if (strcmp(argv[i], "-font") == 0 && i + 1 < argc) {
 			i++;
 			fname = argv[i];
-		}
-		else if (strcmp(argv[i], "-term") == 0 && i+1<argc)
+		} else if (strcmp(argv[i], "-term") == 0 && i + 1 < argc)
 			termprog = argv[++i];
 		else if (strcmp(argv[i], "-version") == 0) {
 			fprintf(stderr, "%s", version[0]);
@@ -102,8 +102,7 @@ char *argv[];
 				fprintf(stderr, "; patch level %d", PATCHLEVEL);
 			fprintf(stderr, "\n");
 			exit(0);
-		}
-		else if (argv[i][0] == '-')
+		} else if (argv[i][0] == '-')
 			usage();
 		else
 			break;
@@ -118,7 +117,7 @@ char *argv[];
 	if (do_exit && do_restart)
 		usage();
 
-	shell = (char *)getenv("SHELL");
+	shell = (char *) getenv("SHELL");
 	if (shell == NULL)
 		shell = DEFSHELL;
 
@@ -181,18 +180,19 @@ char *argv[];
 		_border--;
 		_inset--;
 	}
-
 #ifdef	SHAPE
 	shape = XShapeQueryExtension(dpy, &shape_event, &dummy);
 #endif
 
 	num_screens = ScreenCount(dpy);
-	screens = (ScreenInfo *)malloc(sizeof(ScreenInfo) * num_screens);
+	screens = (ScreenInfo *) malloc(sizeof(ScreenInfo) * num_screens);
 
 	for (i = 0; i < num_screens; i++)
 		initscreen(&screens[i], i, background);
 
-	/* set selection so that 9term knows we're running */
+	/*
+	 * set selection so that 9term knows we're running 
+	 */
 	curtime = CurrentTime;
 	XSetSelectionOwner(dpy, _9wm_running, screens[0].menuwin, timestamp());
 
@@ -205,19 +205,19 @@ char *argv[];
 		scanwins(&screens[i]);
 
 	mainloop(shape_event);
-	
+
 	return 0;
 }
 
 void
 initscreen(s, i, background)
-ScreenInfo *s;
-int i;
-int background;
+     ScreenInfo     *s;
+     int             i;
+     int             background;
 {
-	char *ds, *colon, *dot1;
-	unsigned long mask;
-	XGCValues gv;
+	char           *ds, *colon, *dot1;
+	unsigned long   mask;
+	XGCValues       gv;
 	XSetWindowAttributes attr;
 
 	s->num = i;
@@ -235,20 +235,18 @@ int background;
 		if (!dot1)
 			dot1 = colon + strlen(colon);	/* if not there, append */
 		sprintf(dot1, ".%d", i);
-	}
-	else
+	} else
 		s->display[0] = '\0';
 
 	s->black = BlackPixel(dpy, i);
 	s->white = WhitePixel(dpy, i);
 
-	gv.foreground = s->black^s->white;
+	gv.foreground = s->black ^ s->white;
 	gv.background = s->white;
 	gv.function = GXxor;
 	gv.line_width = 0;
 	gv.subwindow_mode = IncludeInferiors;
-	mask = GCForeground | GCBackground | GCFunction | GCLineWidth
-		| GCSubwindowMode;
+	mask = GCForeground | GCBackground | GCFunction | GCLineWidth | GCSubwindowMode;
 	if (font != 0) {
 		gv.font = font->fid;
 		mask |= GCFont;
@@ -259,9 +257,8 @@ int background;
 
 	attr.cursor = s->arrow;
 	attr.event_mask = SubstructureRedirectMask
-		| SubstructureNotifyMask | ColormapChangeMask
-		| ButtonPressMask | ButtonReleaseMask | PropertyChangeMask;
-	mask = CWCursor|CWEventMask;
+	    | SubstructureNotifyMask | ColormapChangeMask | ButtonPressMask | ButtonReleaseMask | PropertyChangeMask;
+	mask = CWCursor | CWEventMask;
 	XChangeWindowAttributes(dpy, s->root, mask, &attr);
 	XSync(dpy, False);
 
@@ -272,11 +269,11 @@ int background;
 	s->menuwin = XCreateSimpleWindow(dpy, s->root, 0, 0, 1, 1, 1, s->black, s->white);
 }
 
-ScreenInfo *
+ScreenInfo     *
 getscreen(w)
-Window w;
+     Window          w;
 {
-	int i;
+	int             i;
 
 	for (i = 0; i < num_screens; i++)
 		if (screens[i].root == w)
@@ -288,11 +285,10 @@ Window w;
 Time
 timestamp()
 {
-	XEvent ev;
+	XEvent          ev;
 
 	if (curtime == CurrentTime) {
-		XChangeProperty(dpy, screens[0].root, _9wm_running, _9wm_running, 8,
-				PropModeAppend, (unsigned char *)"", 0);
+		XChangeProperty(dpy, screens[0].root, _9wm_running, _9wm_running, 8, PropModeAppend, (unsigned char *) "", 0);
 		XMaskEvent(dpy, PropertyChangeMask, &ev);
 		curtime = ev.xproperty.time;
 	}
@@ -301,14 +297,14 @@ timestamp()
 
 void
 sendcmessage(w, a, x, isroot)
-Window w;
-Atom a;
-long x;
-int isroot;
+     Window          w;
+     Atom            a;
+     long            x;
+     int             isroot;
 {
-	XEvent ev;
-	int status;
-	long mask;
+	XEvent          ev;
+	int             status;
+	long            mask;
 
 	memset(&ev, 0, sizeof(ev));
 	ev.xclient.type = ClientMessage;
@@ -319,7 +315,7 @@ int isroot;
 	ev.xclient.data.l[1] = timestamp();
 	mask = 0L;
 	if (isroot)
-		mask = SubstructureRedirectMask;		/* magic! */
+		mask = SubstructureRedirectMask;	/* magic! */
 	status = XSendEvent(dpy, w, False, mask, &ev);
 	if (status == 0)
 		fprintf(stderr, "9wm: sendcmessage failed\n");
@@ -327,7 +323,7 @@ int isroot;
 
 void
 sendconfig(c)
-Client *c;
+     Client         *c;
 {
 	XConfigureEvent ce;
 
@@ -341,7 +337,7 @@ Client *c;
 	ce.border_width = c->border;
 	ce.above = None;
 	ce.override_redirect = 0;
-	XSendEvent(dpy, c->window, False, StructureNotifyMask, (XEvent*)&ce);
+	XSendEvent(dpy, c->window, False, StructureNotifyMask, (XEvent *) & ce);
 }
 
 void
@@ -352,11 +348,11 @@ sighandler()
 
 void
 getevent(e)
-XEvent *e;
+     XEvent         *e;
 {
-	int fd;
-	fd_set rfds;
-	struct timeval t;
+	int             fd;
+	fd_set          rfds;
+	struct timeval  t;
 
 	if (!signalled) {
 		if (QLength(dpy) > 0) {
@@ -367,7 +363,7 @@ XEvent *e;
 		FD_ZERO(&rfds);
 		FD_SET(fd, &rfds);
 		t.tv_sec = t.tv_usec = 0;
-		if (select(fd+1, &rfds, NULL, NULL, &t) == 1) {
+		if (select(fd + 1, &rfds, NULL, NULL, &t) == 1) {
 			XNextEvent(dpy, e);
 			return;
 		}
@@ -376,7 +372,7 @@ XEvent *e;
 		do {
 			FD_ZERO(&rfds);
 			FD_SET(fd, &rfds);
-			if (select(fd+1, &rfds, NULL, NULL, NULL) == 1) {
+			if (select(fd + 1, &rfds, NULL, NULL, NULL) == 1) {
 				XNextEvent(dpy, e);
 				return;
 			}
@@ -394,11 +390,13 @@ XEvent *e;
 void
 cleanup()
 {
-	Client *c, *cc[2], *next;
-	XWindowChanges wc;
-	int i;
+	Client         *c, *cc[2], *next;
+	XWindowChanges  wc;
+	int             i;
 
-	/* order of un-reparenting determines final stacking order... */
+	/*
+	 * order of un-reparenting determines final stacking order... 
+	 */
 	cc[0] = cc[1] = 0;
 	for (c = clients; c; c = next) {
 		next = c->next;
@@ -411,8 +409,7 @@ cleanup()
 		for (c = cc[i]; c; c = c->next) {
 			if (!withdrawn(c)) {
 				gravitate(c, 1);
-				XReparentWindow(dpy, c->window, c->screen->root,
-						c->x, c->y);
+				XReparentWindow(dpy, c->window, c->screen->root, c->x, c->y);
 			}
 			wc.border_width = c->border;
 			XConfigureWindow(dpy, c->window, CWBorderWidth, &wc);
