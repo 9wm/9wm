@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 multiple authors, see README for licence details 
+ * Copyright (c) 2014 multiple authors, see README for licence details
  */
 #include <stdio.h>
 #include <signal.h>
@@ -16,7 +16,7 @@
 #include "fns.h"
 
 char           *version[] = {
-	"9wm version 2.0, Copyright (c) 2014 multiple authors", 0,
+	"9wm version 2.0, Copyright © 2014 multiple authors", 0,
 };
 
 Display        *dpy;
@@ -67,27 +67,25 @@ sigchld(int signum)
 void
 usage()
 {
-	fprintf(stderr, "usage: 9wm [-grey] [-version] [-font fname] [-term prog] [exit|restart]\n");
+	fprintf(stderr, "usage: 9wm [-version] [-nostalgia] [-font fname] [-term prog] [exit|restart]\n");
 	exit(1);
 }
 
 int
 main(int argc, char *argv[])
 {
-	int             i, background, do_exit, do_restart;
+	int             i, do_exit, do_restart;
 	char           *fname;
 	int             shape_event, dummy;
 
 	myargv = argv;		/* for restart */
 
-	background = do_exit = do_restart = 0;
+	do_exit = do_restart = 0;
 	font = 0;
 	fname = 0;
 	for (i = 1; i < argc; i++)
 		if (strcmp(argv[i], "-nostalgia") == 0)
 			nostalgia++;
-		else if (strcmp(argv[i], "-grey") == 0)
-			background = 1;
 		else if (strcmp(argv[i], "-debug") == 0)
 			debug++;
 		else if (strcmp(argv[i], "-font") == 0 && i + 1 < argc) {
@@ -184,7 +182,7 @@ main(int argc, char *argv[])
 	screens = (ScreenInfo *) malloc(sizeof(ScreenInfo) * num_screens);
 
 	for (i = 0; i < num_screens; i++)
-		initscreen(&screens[i], i, background);
+		initscreen(&screens[i], i);
 
 	/*
 	 * set selection so that 9term knows we're running 
@@ -206,10 +204,7 @@ main(int argc, char *argv[])
 }
 
 void
-initscreen(s, i, background)
-     ScreenInfo     *s;
-     int             i;
-     int             background;
+initscreen(ScreenInfo * s, int i)
 {
 	char           *ds, *colon, *dot1;
 	unsigned long   mask;
@@ -258,10 +253,6 @@ initscreen(s, i, background)
 	XChangeWindowAttributes(dpy, s->root, mask, &attr);
 	XSync(dpy, False);
 
-	if (background) {
-		XSetWindowBackgroundPixmap(dpy, s->root, s->root_pixmap);
-		XClearWindow(dpy, s->root);
-	}
 	s->menuwin = XCreateSimpleWindow(dpy, s->root, 0, 0, 1, 1, 1, s->black, s->white);
 }
 

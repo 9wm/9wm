@@ -132,16 +132,6 @@ Cursordata      blitsweep = {
 	 0x02, 0x00, 0x01, 0xfe, 0xff, 0x01, 0x00, 0x00, 0x00}
 };
 
-/*
- *      Grey tile pattern for root background
- */
-
-#define grey_width 4
-#define grey_height 2
-static char     grey_bits[] = {
-	0x01, 0x04,
-};
-
 static XColor   bl, wh;
 
 Cursor
@@ -179,11 +169,7 @@ initcurs(ScreenInfo * s)
 		s->arrow = XCreateFontCursor(dpy, XC_left_ptr);
 		s->target = XCreateFontCursor(dpy, XC_crosshair);
 		s->sweep0 = XCreateFontCursor(dpy, XC_sizing);
-		s->boxcurs = getcursor(&boxcursdata, s);
+		s->boxcurs = XCreateFontCursor(dpy, XC_dotbox);
 		break;
 	}
-
-	s->root_pixmap = XCreatePixmapFromBitmapData(dpy,
-						     s->root, grey_bits, grey_width, grey_height,
-						     s->black, s->white, DefaultDepth(dpy, s->num));
 }

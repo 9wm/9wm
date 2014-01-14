@@ -1,5 +1,2 @@
-* Give two new mouse pointer options:
-	* The one everybody expects nowadays (left_ptr)
-	* The one used by rio/wily/acme
 * Don't warp mouse pointer for Move
 * Update function declarations to modern C
