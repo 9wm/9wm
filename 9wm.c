@@ -1,4 +1,4 @@
-/* Copyright (c) 2014 Neale Pickett, see README for licence details */
+/* Copyright (c) 2014 multiple authors, see README for licence details */
 #include <stdio.h>
 #include <signal.h>
 #include <errno.h>
@@ -16,7 +16,7 @@
 
 char	*version[] =
 {
-	"9wm version 1.3, Copyright (c) 2014 Neale Pickett", 0,
+	"9wm version 2.0, Copyright (c) 2014 multiple authors", 0,
 };
 
 Display 		*dpy;

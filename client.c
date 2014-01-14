@@ -1,4 +1,4 @@
-/* Copyright (c) 2014 Neale Pickett, see README for licence details */
+/* Copyright (c) 2014 multiple authors, see README for licence details */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
