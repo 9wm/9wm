@@ -1,4 +1,6 @@
-/* Copyright (c) 2014 Neale Pickett, see README for licence details */
+/*
+ * Copyright (c) 2014 multiple authors, see README for licence details 
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <X11/X.h>
@@ -8,11 +10,11 @@
 #include "dat.h"
 #include "fns.h"
 
-int 	ignore_badwindow;
+int             ignore_badwindow;
 
 void
 fatal(s)
-char *s;
+     char           *s;
 {
 	fprintf(stderr, "9wm: ");
 	perror(s);
@@ -22,10 +24,10 @@ char *s;
 
 int
 handler(d, e)
-Display *d;
-XErrorEvent *e;
+     Display        *d;
+     XErrorEvent    *e;
 {
-	char msg[80], req[80], number[80];
+	char            msg[80], req[80], number[80];
 
 	if (initting && (e->request_code == X_ChangeWindowAttributes) && (e->error_code == BadAccess)) {
 		fprintf(stderr, "9wm: it looks like there's already a window manager running;  9wm not started\n");
@@ -41,7 +43,7 @@ XErrorEvent *e;
 	if (req[0] == '\0')
 		sprintf(req, "<request-code-%d>", e->request_code);
 
-	fprintf(stderr, "9wm: %s(0x%x): %s\n", req, (int)e->resourceid, msg);
+	fprintf(stderr, "9wm: %s(0x%x): %s\n", req, (int) e->resourceid, msg);
 
 	if (initting) {
 		fprintf(stderr, "9wm: failure during initialisation; aborting\n");
@@ -52,11 +54,11 @@ XErrorEvent *e;
 
 void
 graberror(f, err)
-char *f;
-int err;
+     char           *f;
+     int             err;
 {
-#ifdef	DEBUG	/* sick of "bug" reports; grab errors "just happen" */
-	char *s;
+#ifdef	DEBUG			/* sick of "bug" reports; grab errors "just happen" */
+	char           *s;
 
 	switch (err) {
 	case GrabNotViewable:
@@ -89,9 +91,9 @@ int err;
 
 void
 dotrace(s, c, e)
-char *s;
-Client *c;
-XEvent *e;
+     char           *s;
+     Client         *c;
+     XEvent         *e;
 {
 	fprintf(stderr, "9wm: %s: c=0x%x", s, c);
 	if (c)

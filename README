@@ -102,7 +102,7 @@ It appears that if it has a modal dialog on the screen, then if any
 of its windows are current, all keypresses are redirected to the
 modal dialog.  This is not 9wm's fault -- Frame Maker is doing this.
 
-Programs like Netscape Navigator like to put riddiculously long
+Programs like Netscape Navigator like to put ridiculously long
 icon name properties on their windows, of the form "Netscape: blah blah".
 There is no way that I know of to stop netscape from doing this.  For this
 reason, 9wm truncates labels at the first colon it finds.  This keeps the
@@ -110,6 +110,10 @@ button 3 menu from becoming excessively wide.  Note that with same
 applications, you can use an iconName resource to set the label; this
 works well for "xman", whose default icon name of "Manual Browser"
 is a tad too long.
+
+Other programs, such as the Chrome web browser, do something similar
+with dashes: "blah blah - blah blah - Chromium".
+For this reason, 9wm chops off everything before the rightmost dash.
 
 See Also
 ========

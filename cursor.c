@@ -1,19 +1,22 @@
-/* Copyright (c) 2014 Neale Pickett, see README for licence details */
+/*
+ * Copyright (c) 2014 multiple authors, see README for licence details 
+ */
 #include <stdio.h>
 #include <X11/X.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
+#include <X11/cursorfont.h>
 #include "dat.h"
 #include "fns.h"
 
 typedef struct {
-	int		width;
-	int		hot[2];
-	unsigned char	mask[64];
-	unsigned char	fore[64];
+	int             width;
+	int             hot[2];
+	unsigned char   mask[64];
+	unsigned char   fore[64];
 } Cursordata;
 
-Cursordata sweep0data = {
+Cursordata      sweep0data = {
 	16,
 	{7, 7},
 	{0xC0, 0x03, 0xC0, 0x03, 0xC0, 0x03, 0xC0, 0x03,
@@ -26,7 +29,7 @@ Cursordata sweep0data = {
 	 0x80, 0x01, 0x80, 0x01, 0x80, 0x01, 0x00, 0x00}
 };
 
-Cursordata boxcursdata = {
+Cursordata      boxcursdata = {
 	16,
 	{7, 7},
 	{0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
@@ -39,7 +42,7 @@ Cursordata boxcursdata = {
 	 0xFE, 0x7F, 0xFE, 0x7F, 0xFE, 0x7F, 0x00, 0x00}
 };
 
-Cursordata sightdata = {
+Cursordata      sightdata = {
 	16,
 	{7, 7},
 	{0xF8, 0x1F, 0xFC, 0x3F, 0xFE, 0x7F, 0xDF, 0xFB,
@@ -52,7 +55,7 @@ Cursordata sightdata = {
 	 0x84, 0x21, 0x8C, 0x31, 0xF0, 0x0F, 0x00, 0x00,}
 };
 
-Cursordata arrowdata = {
+Cursordata      arrowdata = {
 	16,
 	{1, 1},
 	{0xFF, 0x07, 0xFF, 0x07, 0xFF, 0x03, 0xFF, 0x00,
@@ -65,7 +68,7 @@ Cursordata arrowdata = {
 	 0x00, 0x7C, 0x00, 0x38, 0x00, 0x10, 0x00, 0x00,}
 };
 
-Cursordata whitearrow = {
+Cursordata      whitearrow = {
 	16,
 	{0, 0},
 	{0xFF, 0x07, 0xFF, 0x07, 0xFF, 0x03, 0xFF, 0x00,
@@ -78,7 +81,7 @@ Cursordata whitearrow = {
 	 0x00, 0xC6, 0x00, 0x6C, 0x00, 0x38, 0x00, 0x10,}
 };
 
-Cursordata blittarget = {
+Cursordata      blittarget = {
 	18,
 	{8, 8},
 	{0xe0, 0x1f, 0x00, 0xf0, 0x3f, 0x00, 0xf8, 0x7f, 0x00,
@@ -95,7 +98,7 @@ Cursordata blittarget = {
 	 0xf0, 0x3f, 0x00, 0xc0, 0x0f, 0x00, 0x00, 0x00, 0x00}
 };
 
-Cursordata blitarrow = {
+Cursordata      blitarrow = {
 	18,
 	{1, 1},
 	{0xff, 0x0f, 0x00, 0xff, 0x07, 0x00, 0xff, 0x03, 0x00,
@@ -112,7 +115,7 @@ Cursordata blitarrow = {
 	 0x00, 0xe0, 0x00, 0x00, 0x40, 0x00, 0x00, 0x00, 0x00}
 };
 
-Cursordata blitsweep = {
+Cursordata      blitsweep = {
 	18,
 	{8, 8},
 	{0xc4, 0xff, 0x03, 0xce, 0xff, 0x03, 0xdf, 0xff, 0x03,
@@ -129,58 +132,44 @@ Cursordata blitsweep = {
 	 0x02, 0x00, 0x01, 0xfe, 0xff, 0x01, 0x00, 0x00, 0x00}
 };
 
-/*
- *	Grey tile pattern for root background
- */
-
-#define grey_width 4
-#define grey_height 2
-static char grey_bits[] = {
-	0x01, 0x04,
-};
-
-static XColor	bl, wh;
+static XColor   bl, wh;
 
 Cursor
-getcursor(c, s)
-Cursordata *c;
-ScreenInfo *s;
+getcursor(Cursordata * c, ScreenInfo * s)
 {
-	Pixmap f, m;
+	Pixmap          f, m;
 
-	f = XCreatePixmapFromBitmapData(dpy, s->root, (char *)c->fore,
-		c->width, c->width, 1, 0, 1);
-	m = XCreatePixmapFromBitmapData(dpy, s->root, (char *)c->mask,
-		c->width, c->width, 1, 0, 1);
-	return XCreatePixmapCursor(dpy, f, m, &bl, &wh,
-			c->hot[0], c->hot[1]);
+	f = XCreatePixmapFromBitmapData(dpy, s->root, (char *) c->fore, c->width, c->width, 1, 0, 1);
+	m = XCreatePixmapFromBitmapData(dpy, s->root, (char *) c->mask, c->width, c->width, 1, 0, 1);
+	return XCreatePixmapCursor(dpy, f, m, &bl, &wh, c->hot[0], c->hot[1]);
 }
 
 void
-initcurs(s)
-ScreenInfo *s;
+initcurs(ScreenInfo * s)
 {
-	XColor dummy;
+	XColor          dummy;
 
-	XAllocNamedColor(dpy, DefaultColormap(dpy, s->num),
-			"black", &bl, &dummy);
-	XAllocNamedColor(dpy, DefaultColormap(dpy, s->num),
-			"white", &wh, &dummy);
+	XAllocNamedColor(dpy, DefaultColormap(dpy, s->num), "black", &bl, &dummy);
+	XAllocNamedColor(dpy, DefaultColormap(dpy, s->num), "white", &wh, &dummy);
 
-	if (nostalgia) {
+	switch (nostalgia) {
+	case BLIT:
 		s->arrow = getcursor(&blitarrow, s);
 		s->target = getcursor(&blittarget, s);
 		s->sweep0 = getcursor(&blitsweep, s);
 		s->boxcurs = getcursor(&blitsweep, s);
-	}
-	else {
+		break;
+	case V1:
 		s->arrow = getcursor(&arrowdata, s);
 		s->target = getcursor(&sightdata, s);
 		s->sweep0 = getcursor(&sweep0data, s);
 		s->boxcurs = getcursor(&boxcursdata, s);
+		break;
+	default:
+		s->arrow = XCreateFontCursor(dpy, XC_left_ptr);
+		s->target = XCreateFontCursor(dpy, XC_crosshair);
+		s->sweep0 = XCreateFontCursor(dpy, XC_sizing);
+		s->boxcurs = XCreateFontCursor(dpy, XC_dotbox);
+		break;
 	}
-
-	s->root_pixmap = XCreatePixmapFromBitmapData(dpy,
-		s->root, grey_bits, grey_width, grey_height,
-		s->black, s->white, DefaultDepth(dpy, s->num));
 }

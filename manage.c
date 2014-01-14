@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Neale Pickett, see README for licence details 
+ * Copyright (c) 2014 multiple authors, see README for licence details 
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -364,8 +364,12 @@ setlabel(c)
 		label = c->class;
 	else
 		label = "no label";
-	if ((p = index(label, ':')) != 0)
+	if ((p = strchr(label, ':')) != 0)
 		*p = '\0';
+	if ((p = strrchr(label, '-'))) {
+		label = p+1;
+	}
+	for (; *label == ' '; label += 1);
 	c->label = label;
 }
 
