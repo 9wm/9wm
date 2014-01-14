@@ -6,7 +6,7 @@
 #define	trace(s, c, e)
 #endif
 
-/* main.c */
+/* 9wm.c */
 void	usage();
 void	initscreen();
 ScreenInfo *getscreen();
@@ -90,4 +90,4 @@ void	showhints();
 void	dotrace();
 
 /* cursor.c */
-void	initcurs();
+void	initcurs(ScreenInfo * s);

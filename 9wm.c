@@ -14,7 +14,6 @@
 #include <X11/extensions/shape.h>
 #include "dat.h"
 #include "fns.h"
-#include "patchlevel.h"
 
 char           *version[] = {
 	"9wm version 2.0, Copyright (c) 2014 multiple authors", 0,
@@ -48,6 +47,8 @@ Atom            _9wm_running;
 Atom            _9wm_hold_mode;
 
 char           *fontlist[] = {
+	"-*-dejavu sans-bold-r-*-*-14-*-*-*-p-*-*-*",
+	"-adobe-helvetica-bold-r-*-*-14-*-*-*-p-*-*-*",
 	"lucm.latin1.9",
 	"blit",
 	"9x15bold",
@@ -71,9 +72,7 @@ usage()
 }
 
 int
-main(argc, argv)
-     int             argc;
-     char           *argv[];
+main(int argc, char *argv[])
 {
 	int             i, background, do_exit, do_restart;
 	char           *fname;
@@ -97,10 +96,7 @@ main(argc, argv)
 		} else if (strcmp(argv[i], "-term") == 0 && i + 1 < argc)
 			termprog = argv[++i];
 		else if (strcmp(argv[i], "-version") == 0) {
-			fprintf(stderr, "%s", version[0]);
-			if (PATCHLEVEL > 0)
-				fprintf(stderr, "; patch level %d", PATCHLEVEL);
-			fprintf(stderr, "\n");
+			fprintf(stderr, "%s\n", version[0]);
 			exit(0);
 		} else if (argv[i][0] == '-')
 			usage();
@@ -176,7 +172,7 @@ main(argc, argv)
 				break;
 		}
 	}
-	if (nostalgia) {
+	if (nostalgia == BLIT) {
 		_border--;
 		_inset--;
 	}

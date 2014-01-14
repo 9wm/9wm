@@ -5,6 +5,7 @@
 #include <X11/X.h>
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
+#include <X11/cursorfont.h>
 #include "dat.h"
 #include "fns.h"
 
@@ -144,9 +145,7 @@ static char     grey_bits[] = {
 static XColor   bl, wh;
 
 Cursor
-getcursor(c, s)
-     Cursordata     *c;
-     ScreenInfo     *s;
+getcursor(Cursordata * c, ScreenInfo * s)
 {
 	Pixmap          f, m;
 
@@ -156,24 +155,32 @@ getcursor(c, s)
 }
 
 void
-initcurs(s)
-     ScreenInfo     *s;
+initcurs(ScreenInfo * s)
 {
 	XColor          dummy;
 
 	XAllocNamedColor(dpy, DefaultColormap(dpy, s->num), "black", &bl, &dummy);
 	XAllocNamedColor(dpy, DefaultColormap(dpy, s->num), "white", &wh, &dummy);
 
-	if (nostalgia) {
+	switch (nostalgia) {
+	case BLIT:
 		s->arrow = getcursor(&blitarrow, s);
 		s->target = getcursor(&blittarget, s);
 		s->sweep0 = getcursor(&blitsweep, s);
 		s->boxcurs = getcursor(&blitsweep, s);
-	} else {
+		break;
+	case V1:
 		s->arrow = getcursor(&arrowdata, s);
 		s->target = getcursor(&sightdata, s);
 		s->sweep0 = getcursor(&sweep0data, s);
 		s->boxcurs = getcursor(&boxcursdata, s);
+		break;
+	default:
+		s->arrow = XCreateFontCursor(dpy, XC_left_ptr);
+		s->target = XCreateFontCursor(dpy, XC_crosshair);
+		s->sweep0 = XCreateFontCursor(dpy, XC_sizing);
+		s->boxcurs = getcursor(&boxcursdata, s);
+		break;
 	}
 
 	s->root_pixmap = XCreatePixmapFromBitmapData(dpy,

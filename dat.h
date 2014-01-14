@@ -89,6 +89,13 @@ struct ScreenInfo {
 	char			display[256];	/* arbitrary limit */
 };
 
+// Nostalgia options
+enum {
+	MODERN = 0,
+	V1,
+	BLIT
+};
+
 /* main.c */
 extern Display		*dpy;
 extern ScreenInfo	*screens;
