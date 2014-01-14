@@ -11,7 +11,6 @@
 #include <X11/extensions/shape.h>
 #include "dat.h"
 #include "fns.h"
-#include "patchlevel.h"
 
 void
 mainloop(shape_event)
