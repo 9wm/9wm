@@ -217,12 +217,12 @@ initscreen(ScreenInfo * s, int i)
 	s->min_cmaps = MinCmapsOfScreen(ScreenOfDisplay(dpy, i));
 
 	ds = DisplayString(dpy);
-	colon = rindex(ds, ':');
+	colon = strrchr(ds, ':');
 	if (colon && num_screens > 1) {
 		strcpy(s->display, "DISPLAY=");
 		strcat(s->display, ds);
 		colon = s->display + 8 + (colon - ds);	/* use version in buf */
-		dot1 = index(colon, '.');	/* first period after colon */
+		dot1 = strchr(colon, '.');	/* first period after colon */
 		if (!dot1)
 			dot1 = colon + strlen(colon);	/* if not there, append */
 		sprintf(dot1, ".%d", i);

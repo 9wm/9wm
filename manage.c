@@ -364,8 +364,12 @@ setlabel(c)
 		label = c->class;
 	else
 		label = "no label";
-	if ((p = index(label, ':')) != 0)
+	if ((p = strchr(label, ':')) != 0)
 		*p = '\0';
+	if ((p = strrchr(label, '-'))) {
+		label = p+1;
+	}
+	for (; *label == ' '; label += 1);
 	c->label = label;
 }
 
