@@ -4,4 +4,5 @@
 	* c->name = ":: " .. c->name .. " ::"
 	* Maybe different font or color? But this violiates 0-1-many
 	* Maybe uniconify and raise?
-* Bring back placement of xterm launched by new (like rio)
+* Bring back placement of xterm launched by "New" (like rio)
+* How is rio placing Google Hangouts popups in the southeast?
