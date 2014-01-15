@@ -1,2 +1,7 @@
 * Don't warp mouse pointer for Move
-* Update function declarations to modern C
+* Update function declarations to modern C (as I touch them)
+* Urgent hints
+	* c->name = ":: " .. c->name .. " ::"
+	* Maybe different font or color? But this violiates 0-1-many
+	* Maybe uniconify and raise?
+* Bring back placement of xterm launched by new (like rio)
