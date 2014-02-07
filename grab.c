@@ -173,7 +173,11 @@ menuhit(e, m)
 		case Expose:
 			XClearWindow(dpy, s->menuwin);
 			for (i = 0; i < n; i++) {
-				tx = (wide - XTextWidth(font, m->item[i], strlen(m->item[i]))) / 2;
+				if (i < 5) {
+					tx = (wide - XTextWidth(font, m->item[i], strlen(m->item[i]))) / 2;
+				} else {
+					tx = 1;
+				}
 				ty = i * high + font->ascent + 1;
 				XDrawString(dpy, s->menuwin, s->gc, tx, ty, m->item[i], strlen(m->item[i]));
 			}
