@@ -1,4 +1,6 @@
-                           9wm Version 1.2
+9wm Version 1.2
+===============
+
 
 What is 9wm?
 ============
@@ -14,32 +16,36 @@ One major difference between 9wm and 8-1/2 is that the latter provides
 windows of text with a typescript interface, and doesn't need to run a
 separate program to emulate a terminal.  9wm, as an X window manager,
 does require a separate program.  For better 8-1/2 emulation, you should
-obtain Matthew Farrow's "9term" program (ftp://ftp.cs.su.oz.au/matty/unicode),
+obtain Matthew Farrow's "9term" program <ftp://ftp.cs.su.oz.au/matty/unicode>,
 version 1.6 or later (earlier versions don't cooperate with 9wm in
 implementing "hold mode").  Of course, you can run xterm under 9wm as well.
+
 
 What is 9wm not?
 ================
 
 9wm is not a virtual window manager.  It is not customisable to any
 great extent.  It is not large and unwieldy, and doesn't use the X
-toolkit.  Requests to make it any of these things will be silently
-ignored (or flamed if I have had a bad day :-)  If you want tvtwm
-or mwm, you know where to get them...
+toolkit.
+If you want tvtwm or mwm, you know where to get them...
+
 
 Where do I get it?
 ==================
 
-The latest version of 9wm is held at http://woozle.org/neale/g.cgi/x11/9wm
+The latest version of 9wm is held at <http://woozle.org/neale/g.cgi/x11/9wm>
+
 
 Author
 ======
 
 9wm was written by David Hogan (dhog@cs.su.oz.au), a postgraduate
 student at the Basser Department of Computer Science, University
-of Sydney (http://www.cs.su.oz.au/~dhog/).
+of Sydney <http://www.cs.su.oz.au/~dhog/>.
 
-It's being maintained by Neale Pickett <neale@woozle.org>
+David Hogan died in 2003.
+9wm is now maintained by Neale Pickett <neale@woozle.org>.
+
 
 Licence
 =======
@@ -66,6 +72,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+
 How do I compile/install it?
 ============================
 
@@ -73,16 +80,35 @@ Assuming your system is correctly configured, you should only need to
 run make or make install.  make install.man should copy the manpage
 (9wm.man) to the appropriate directory.
 
-I (Neale) removed the xmkmf stuff, because I feel like most people
-don't know what that is anymore. It should compile without problems
-on Linux or *BSD, but please let me know if you have problems. If
-you're using a vintage OS, you should probably use 9wm 1.1.
+I (Neale) removed the xmkmf stuff,
+because I feel like most people don't know what that is anymore.
+It should compile without problems on Linux or *BSD,
+but please let me know if you have difficulty.
+If you're using a vintage OS,
+you should probably use 9wm 1.1.
+
 
 How do I use it?
 ================
 
-See the manual page for details.  You should probably read the
-man page for 9term as well.
+The focused window has a black border.
+Mouse and keyboard events go to this window.
+Left click a non-focused window (white border) to focus it.
+
+Right-click anywhere other than the focused window,
+including in any non-focused window,
+to bring up a menu.
+All further actions are done with the right mouse button.
+The menu has options for:
+
+* New: launch a new xterm
+* Reshape: select a window, draw new rectangle for its size
+* Move: drag a window around
+* Delete: kill (close) a window
+* Hide: hide (iconify) a window
+
+Beneath the first 5 items are a list of all hidden windows.
+
 
 What if I find a bug?
 =====================
@@ -90,6 +116,7 @@ What if I find a bug?
 Please mail all bug reports to neale@woozle.org, so
 that I can incorporate fixes into the next release.  If you can
 tell me how to fix it, all the better.
+
 
 Known Problems/Bugs
 ===================
@@ -114,6 +141,7 @@ is a tad too long.
 Other programs, such as the Chrome web browser, do something similar
 with dashes: "blah blah - blah blah - Chromium".
 For this reason, 9wm chops off everything before the rightmost dash.
+
 
 See Also
 ========
