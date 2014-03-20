@@ -165,13 +165,17 @@ menuhit(XButtonEvent * e, Menu * m)
 		case Expose:
 			XClearWindow(dpy, s->menuwin);
 			for (i = 0; i < n; i++) {
+				char *item;
+
 				if (i < 5) {
-					tx = (wide - XTextWidth(font, m->item[i], strlen(m->item[i]))) / 2;
+					item = m->item[i];
+					tx = (wide - XTextWidth(font, item, strlen(item))) / 2;
 				} else {
+					item = m->item[n - i + 4];
 					tx = 1;
 				}
 				ty = i * high + font->ascent + 1;
-				XDrawString(dpy, s->menuwin, s->gc, tx, ty, m->item[i], strlen(m->item[i]));
+				XDrawString(dpy, s->menuwin, s->gc, tx, ty, item, strlen(item));
 			}
 			if (cur >= 0 && cur < n)
 				XFillRectangle(dpy, s->menuwin, s->gc, 0, cur * high, wide, high);
