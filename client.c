@@ -76,7 +76,7 @@ active(c)
 }
 
 void
-nofocus()
+nofocus(void)
 {
 	static Window   w = 0;
 	int             mask;
@@ -215,7 +215,7 @@ rmclient(c)
 
 #ifdef	DEBUG
 void
-dump_revert()
+dump_revert(void)
 {
 	Client         *c;
 	int             i;
@@ -234,7 +234,7 @@ dump_revert()
 }
 
 void
-dump_clients()
+dump_clients(void)
 {
 	Client         *c;
 

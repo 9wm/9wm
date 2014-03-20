@@ -13,8 +13,7 @@
 int             ignore_badwindow;
 
 void
-fatal(s)
-     char           *s;
+fatal(char *s)
 {
 	fprintf(stderr, "9wm: ");
 	perror(s);
@@ -23,9 +22,7 @@ fatal(s)
 }
 
 int
-handler(d, e)
-     Display        *d;
-     XErrorEvent    *e;
+handler(Display * d, XErrorEvent * e)
 {
 	char            msg[80], req[80], number[80];
 
@@ -53,9 +50,7 @@ handler(d, e)
 }
 
 void
-graberror(f, err)
-     char           *f;
-     int             err;
+graberror(char *f, int err)
 {
 #ifdef	DEBUG			/* sick of "bug" reports; grab errors "just happen" */
 	char           *s;
@@ -90,10 +85,7 @@ graberror(f, err)
 #ifdef	DEBUG
 
 void
-dotrace(s, c, e)
-     char           *s;
-     Client         *c;
-     XEvent         *e;
+dotrace(char *s, Client * c, XEvent * e)
 {
 	fprintf(stderr, "9wm: %s: c=0x%x", s, c);
 	if (c)

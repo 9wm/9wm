@@ -65,7 +65,7 @@ sigchld(int signum)
 }
 
 void
-usage()
+usage(void)
 {
 	fprintf(stderr, "usage: 9wm [-version] [-nostalgia] [-font fname] [-term prog] [exit|restart]\n");
 	exit(1);
@@ -257,8 +257,7 @@ initscreen(ScreenInfo * s, int i)
 }
 
 ScreenInfo     *
-getscreen(w)
-     Window          w;
+getscreen(Window w)
 {
 	int             i;
 
@@ -270,7 +269,7 @@ getscreen(w)
 }
 
 Time
-timestamp()
+timestamp(void)
 {
 	XEvent          ev;
 
@@ -283,11 +282,7 @@ timestamp()
 }
 
 void
-sendcmessage(w, a, x, isroot)
-     Window          w;
-     Atom            a;
-     long            x;
-     int             isroot;
+sendcmessage(Window w, Atom a, long x, int isroot)
 {
 	XEvent          ev;
 	int             status;
@@ -328,14 +323,13 @@ sendconfig(c)
 }
 
 void
-sighandler()
+sighandler(void)
 {
 	signalled = 1;
 }
 
 void
-getevent(e)
-     XEvent         *e;
+getevent(XEvent * e)
 {
 	int             fd;
 	fd_set          rfds;
@@ -375,7 +369,7 @@ getevent(e)
 }
 
 void
-cleanup()
+cleanup(void)
 {
 	Client         *c, *cc[2], *next;
 	XWindowChanges  wc;

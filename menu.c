@@ -35,8 +35,7 @@ Menu            egg = {
 };
 
 void
-button(e)
-     XButtonEvent   *e;
+button(XButtonEvent * e)
 {
 	int             n, shift;
 	Client         *c;
@@ -102,8 +101,7 @@ button(e)
 }
 
 void
-spawn(s)
-     ScreenInfo     *s;
+spawn(ScreenInfo * s)
 {
 	if (fork() == 0) {
 		close(ConnectionNumber(dpy));
@@ -192,9 +190,7 @@ hide(c)
 }
 
 void
-unhide(n, map)
-     int             n;
-     int             map;
+unhide(int n, int map)
 {
 	Client         *c;
 	int             i;

@@ -13,8 +13,7 @@
 #include "fns.h"
 
 void
-mainloop(shape_event)
-     int             shape_event;
+mainloop(int shape_event)
 {
 	XEvent          ev;
 
@@ -103,8 +102,7 @@ mainloop(shape_event)
 
 
 void
-configurereq(e)
-     XConfigureRequestEvent *e;
+configurereq(XConfigureRequestEvent * e)
 {
 	XWindowChanges  wc;
 	Client         *c;
@@ -168,8 +166,7 @@ configurereq(e)
 }
 
 void
-mapreq(e)
-     XMapRequestEvent *e;
+mapreq(XMapRequestEvent * e)
 {
 	Client         *c;
 	int             i;
@@ -219,8 +216,7 @@ mapreq(e)
 }
 
 void
-unmap(e)
-     XUnmapEvent    *e;
+unmap(XUnmapEvent * e)
 {
 	Client         *c;
 
@@ -246,15 +242,13 @@ unmap(e)
 }
 
 void
-circulatereq(e)
-     XCirculateRequestEvent *e;
+circulatereq(XCirculateRequestEvent * e)
 {
 	fprintf(stderr, "It must be the warlock Krill!\n");	/* :-) */
 }
 
 void
-newwindow(e)
-     XCreateWindowEvent *e;
+newwindow(XCreateWindowEvent * e)
 {
 	Client         *c;
 	ScreenInfo     *s;
@@ -278,8 +272,7 @@ newwindow(e)
 }
 
 void
-destroy(w)
-     Window          w;
+destroy(Window w)
 {
 	Client         *c;
 
@@ -299,8 +292,7 @@ destroy(w)
 }
 
 void
-clientmesg(e)
-     XClientMessageEvent *e;
+clientmesg(XClientMessageEvent * e)
 {
 	Client         *c;
 
@@ -330,8 +322,7 @@ clientmesg(e)
 }
 
 void
-cmap(e)
-     XColormapEvent *e;
+cmap(XColormapEvent * e)
 {
 	Client         *c;
 	int             i;
@@ -359,8 +350,7 @@ cmap(e)
 }
 
 void
-property(e)
-     XPropertyEvent *e;
+property(XPropertyEvent * e)
 {
 	Atom            a;
 	int             delete;
@@ -406,8 +396,7 @@ property(e)
 }
 
 void
-reparent(e)
-     XReparentEvent *e;
+reparent(XReparentEvent * e)
 {
 	Client         *c;
 	XWindowAttributes attr;
@@ -457,8 +446,7 @@ shapenotify(e)
 #endif
 
 void
-enter(e)
-     XCrossingEvent *e;
+enter(XCrossingEvent * e)
 {
 	Client         *c;
 
@@ -477,8 +465,7 @@ enter(e)
 }
 
 void
-focusin(e)
-     XFocusChangeEvent *e;
+focusin(XFocusChangeEvent * e)
 {
 	Client         *c;
 

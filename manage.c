@@ -143,8 +143,7 @@ manage(c, mapped)
 }
 
 void
-scanwins(s)
-     ScreenInfo     *s;
+scanwins(ScreenInfo * s)
 {
 	unsigned int    i, nwins;
 	Client         *c;
@@ -269,9 +268,7 @@ gravitate(c, invert)
 }
 
 static void
-installcmap(s, cmap)
-     ScreenInfo     *s;
-     Colormap        cmap;
+installcmap(ScreenInfo * s, Colormap cmap)
 {
 	if (cmap == None)
 		XInstallColormap(dpy, s->def_cmap);
@@ -304,8 +301,7 @@ cmapfocus(c)
 }
 
 void
-cmapnofocus(s)
-     ScreenInfo     *s;
+cmapnofocus(ScreenInfo * s)
 {
 	installcmap(s, None);
 }
@@ -365,7 +361,7 @@ setlabel(c)
 	else
 		label = "no label";
 	if ((p = strrchr(label, '-'))) {
-		label = p+1;
+		label = p + 1;
 	}
 	if ((p = strchr(label, ':')) != 0)
 		*p = '\0';
@@ -392,12 +388,8 @@ setshape(c)
 #endif
 
 int
-_getprop(w, a, type, len, p)
-     Window          w;
-     Atom            a;
-     Atom            type;
-     long            len;	/* in 32-bit multiples... */
-     unsigned char **p;
+_getprop(Window w, Atom a, Atom type, long len,	/* in 32-bit multiples... */
+	 unsigned char **p)
 {
 	Atom            real_type;
 	int             format;
@@ -416,9 +408,7 @@ _getprop(w, a, type, len, p)
 }
 
 char           *
-getprop(w, a)
-     Window          w;
-     Atom            a;
+getprop(Window w, Atom a)
 {
 	unsigned char  *p;
 
@@ -428,10 +418,7 @@ getprop(w, a)
 }
 
 int
-get1prop(w, a, type)
-     Window          w;
-     Atom            a;
-     Atom            type;
+get1prop(Window w, Atom a, Atom type)
 {
 	char          **p, *x;
 
@@ -443,17 +430,13 @@ get1prop(w, a, type)
 }
 
 Window
-getwprop(w, a)
-     Window          w;
-     Atom            a;
+getwprop(Window w, Atom a)
 {
 	return get1prop(w, a, XA_WINDOW);
 }
 
 int
-getiprop(w, a)
-     Window          w;
-     Atom            a;
+getiprop(Window w, Atom a)
 {
 	return get1prop(w, a, XA_INTEGER);
 }
@@ -473,9 +456,7 @@ setwstate(c, state)
 }
 
 int
-getwstate(w, state)
-     Window          w;
-     int            *state;
+getwstate(Window w, int *state)
 {
 	long           *p = 0;
 

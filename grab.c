@@ -10,8 +10,8 @@
 #include "fns.h"
 
 int
-nobuttons(e)			/* Einstuerzende */
-     XButtonEvent   *e;
+nobuttons(			/* Einstuerzende */
+		 XButtonEvent * e)
 {
 	int             state;
 
@@ -20,12 +20,7 @@ nobuttons(e)			/* Einstuerzende */
 }
 
 int
-grab(w, constrain, mask, curs, t)
-     Window          w;
-     Window          constrain;
-     int             mask;
-     Cursor          curs;
-     int             t;
+grab(Window w, Window constrain, int mask, Cursor curs, int t)
 {
 	int             status;
 
@@ -36,8 +31,7 @@ grab(w, constrain, mask, curs, t)
 }
 
 void
-ungrab(e)
-     XButtonEvent   *e;
+ungrab(XButtonEvent * e)
 {
 	XEvent          ev;
 
@@ -55,9 +49,7 @@ ungrab(e)
 }
 
 int
-menuhit(e, m)
-     XButtonEvent   *e;
-     Menu           *m;
+menuhit(XButtonEvent * e, Menu * m)
 {
 	XEvent          ev;
 	int             i, n, cur, old, wide, high, status, drawn, warp;
@@ -318,8 +310,7 @@ drawbound(c)
 }
 
 void
-misleep(msec)
-     int             msec;
+misleep(int msec)
 {
 	struct timeval  t;
 
@@ -465,10 +456,7 @@ drag(c)
 }
 
 void
-getmouse(x, y, s)
-     int            *x;
-     int            *y;
-     ScreenInfo     *s;
+getmouse(int *x, int *y, ScreenInfo * s)
 {
 	Window          dw1, dw2;
 	int             t1, t2;
@@ -478,10 +466,7 @@ getmouse(x, y, s)
 }
 
 void
-setmouse(x, y, s)
-     int             x;
-     int             y;
-     ScreenInfo     *s;
+setmouse(int x, int y, ScreenInfo * s)
 {
 	XWarpPointer(dpy, None, s->root, None, None, None, None, x, y);
 }
