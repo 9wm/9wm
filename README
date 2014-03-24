@@ -24,10 +24,12 @@ implementing "hold mode").  Of course, you can run xterm under 9wm as well.
 What is 9wm not?
 ================
 
-9wm is not a virtual window manager.  It is not customisable to any
-great extent.  It is not large and unwieldy, and doesn't use the X
-toolkit.
-If you want tvtwm or mwm, you know where to get them...
+9wm is not a virtual window manager.
+It is not customisable to any great extent.
+It is not large and unwieldy.
+It doesn't use the X toolkit.
+It has no key bindings.
+It doesn't do compositing.
 
 
 Where do I get it?
@@ -140,7 +142,8 @@ is a tad too long.
 
 Other programs, such as the Chrome web browser, do something similar
 with dashes: "blah blah - blah blah - Chromium".
-For this reason, 9wm chops off everything before the rightmost dash.
+For this reason,
+9wm chops off everything before and including the rightmost dash.
 
 
 See Also
