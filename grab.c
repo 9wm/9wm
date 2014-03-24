@@ -12,7 +12,7 @@
 int
 nobuttons(XButtonEvent * e)
 {
-	int             state;
+	int state;
 
 	state = (e->state & AllButtonMask);
 	return (e->type == ButtonRelease) && (state & (state - 1)) == 0;
@@ -21,7 +21,7 @@ nobuttons(XButtonEvent * e)
 int
 grab(Window w, Window constrain, int mask, Cursor curs, int t)
 {
-	int             status;
+	int status;
 
 	if (t == 0)
 		t = timestamp();
@@ -32,7 +32,7 @@ grab(Window w, Window constrain, int mask, Cursor curs, int t)
 void
 ungrab(XButtonEvent * e)
 {
-	XEvent          ev;
+	XEvent ev;
 
 	if (!nobuttons(e))
 		for (;;) {
@@ -50,11 +50,11 @@ ungrab(XButtonEvent * e)
 int
 menuhit(XButtonEvent * e, Menu * m)
 {
-	XEvent          ev;
-	int             i, n, cur, old, wide, high, status, drawn, warp;
-	int             x, y, dx, dy, xmax, ymax;
-	int             tx, ty;
-	ScreenInfo     *s;
+	XEvent ev;
+	int i, n, cur, old, wide, high, status, drawn, warp;
+	int x, y, dx, dy, xmax, ymax;
+	int tx, ty;
+	ScreenInfo *s;
 
 	if (font == 0)
 		return -1;
@@ -181,17 +181,17 @@ menuhit(XButtonEvent * e, Menu * m)
 	}
 }
 
-Client         *
+Client *
 selectwin(release, shift, s)
-     int             release;
-     int            *shift;
-     ScreenInfo     *s;
+     int release;
+     int *shift;
+     ScreenInfo *s;
 {
-	XEvent          ev;
-	XButtonEvent   *e;
-	int             status;
-	Window          w;
-	Client         *c;
+	XEvent ev;
+	XButtonEvent *e;
+	int status;
+	Window w;
+	Client *c;
 
 	status = grab(s->root, s->root, ButtonMask, s->target, 0);
 	if (status != GrabSuccess) {
@@ -231,11 +231,11 @@ selectwin(release, shift, s)
 
 void
 sweepcalc(c, x, y)
-     Client         *c;
-     int             x;
-     int             y;
+     Client *c;
+     int x;
+     int y;
 {
-	int             dx, dy, sx, sy;
+	int dx, dy, sx, sy;
 
 	dx = x - c->x;
 	dy = y - c->y;
@@ -276,9 +276,9 @@ sweepcalc(c, x, y)
 
 void
 dragcalc(c, x, y)
-     Client         *c;
-     int             x;
-     int             y;
+     Client *c;
+     int x;
+     int y;
 {
 	c->x = x;
 	c->y = y;
@@ -286,10 +286,10 @@ dragcalc(c, x, y)
 
 void
 drawbound(c)
-     Client         *c;
+     Client *c;
 {
-	int             x, y, dx, dy;
-	ScreenInfo     *s;
+	int x, y, dx, dy;
+	ScreenInfo *s;
 
 	s = c->screen;
 	x = c->x;
@@ -313,7 +313,7 @@ drawbound(c)
 void
 misleep(int msec)
 {
-	struct timeval  t;
+	struct timeval t;
 
 	t.tv_sec = msec / 1000;
 	t.tv_usec = (msec % 1000) * 1000;
@@ -322,15 +322,15 @@ misleep(int msec)
 
 int
 sweepdrag(c, e0, recalc)
-     Client         *c;
-     XButtonEvent   *e0;
-     void            (*recalc) ();
+     Client *c;
+     XButtonEvent *e0;
+     void (*recalc) ();
 {
-	XEvent          ev;
-	int             idle;
-	int             cx, cy, rx, ry;
-	int             ox, oy, odx, ody;
-	XButtonEvent   *e;
+	XEvent ev;
+	int idle;
+	int cx, cy, rx, ry;
+	int ox, oy, odx, ody;
+	XButtonEvent *e;
 
 	ox = c->x;
 	oy = c->y;
@@ -407,12 +407,12 @@ sweepdrag(c, e0, recalc)
 
 int
 sweep(c)
-     Client         *c;
+     Client *c;
 {
-	XEvent          ev;
-	int             status;
-	XButtonEvent   *e;
-	ScreenInfo     *s;
+	XEvent ev;
+	int status;
+	XButtonEvent *e;
+	ScreenInfo *s;
 
 	s = c->screen;
 	status = grab(s->root, s->root, ButtonMask, s->sweep0, 0);
@@ -435,10 +435,10 @@ sweep(c)
 
 int
 drag(c)
-     Client         *c;
+     Client *c;
 {
-	int             status;
-	ScreenInfo     *s;
+	int status;
+	ScreenInfo *s;
 
 	s = c->screen;
 	if (c->init)
@@ -459,9 +459,9 @@ drag(c)
 void
 getmouse(int *x, int *y, ScreenInfo * s)
 {
-	Window          dw1, dw2;
-	int             t1, t2;
-	unsigned int    t3;
+	Window dw1, dw2;
+	int t1, t2;
+	unsigned int t3;
 
 	XQueryPointer(dpy, s->root, &dw1, &dw2, x, y, &t1, &t2, &t3);
 }

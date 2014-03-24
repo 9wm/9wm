@@ -10,13 +10,13 @@
 #include "dat.h"
 #include "fns.h"
 
-Client         *clients;
-Client         *current;
+Client *clients;
+Client *current;
 
 void
 setactive(c, on)
-     Client         *c;
-     int             on;
+     Client *c;
+     int on;
 {
 	if (c->parent == c->screen->root) {
 		fprintf(stderr, "9wm: bad parent in setactive; dumping core\n");
@@ -35,8 +35,8 @@ setactive(c, on)
 
 void
 draw_border(c, active)
-     Client         *c;
-     int             active;
+     Client *c;
+     int active;
 {
 	XSetWindowBackground(dpy, c->parent, active ? c->screen->black : c->screen->white);
 	XClearWindow(dpy, c->parent);
@@ -46,9 +46,9 @@ draw_border(c, active)
 
 void
 active(c)
-     Client         *c;
+     Client *c;
 {
-	Client         *cc;
+	Client *cc;
 
 	if (c == 0) {
 		fprintf(stderr, "9wm: active(c==0)\n");
@@ -78,10 +78,10 @@ active(c)
 void
 nofocus(void)
 {
-	static Window   w = 0;
-	int             mask;
+	static Window w = 0;
+	int mask;
 	XSetWindowAttributes attr;
-	Client         *c;
+	Client *c;
 
 	if (current) {
 		setactive(current, 0);
@@ -107,9 +107,9 @@ nofocus(void)
 
 void
 top(c)
-     Client         *c;
+     Client *c;
 {
-	Client        **l, *cc;
+	Client **l, *cc;
 
 	l = &clients;
 	for (cc = *l; cc; cc = *l) {
@@ -124,12 +124,12 @@ top(c)
 	fprintf(stderr, "9wm: %p not on client list in top()\n", c);
 }
 
-Client         *
+Client *
 getclient(w, create)
-     Window          w;
-     int             create;
+     Window w;
+     int create;
 {
-	Client         *c;
+	Client *c;
 
 	if (w == 0 || getscreen(w))
 		return 0;
@@ -166,9 +166,9 @@ getclient(w, create)
 
 void
 rmclient(c)
-     Client         *c;
+     Client *c;
 {
-	Client         *cc;
+	Client *cc;
 
 	for (cc = current; cc && cc->revert; cc = cc->revert)
 		if (cc->revert == c)
@@ -217,8 +217,8 @@ rmclient(c)
 void
 dump_revert(void)
 {
-	Client         *c;
-	int             i;
+	Client *c;
+	int i;
 
 	i = 0;
 	for (c = current; c; c = c->revert) {
@@ -236,7 +236,7 @@ dump_revert(void)
 void
 dump_clients(void)
 {
-	Client         *c;
+	Client *c;
 
 	for (c = clients; c; c = c->next)
 		fprintf(stderr, "w 0x%x parent 0x%x @ (%d, %d)\n", c->window, c->parent, c->x, c->y);

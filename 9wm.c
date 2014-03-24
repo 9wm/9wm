@@ -15,38 +15,38 @@
 #include "dat.h"
 #include "fns.h"
 
-char           *version[] = {
+char *version[] = {
 	"9wm version 2.0, Copyright © 2014 multiple authors", 0,
 };
 
-Display        *dpy;
-ScreenInfo     *screens;
-int             initting;
-XFontStruct    *font;
-int             nostalgia;
-char          **myargv;
-char           *termprog;
-char           *shell;
-Bool            shape;
-int             _border = 4;
-int             _inset = 1;
-int             curtime;
-int             debug;
-int             signalled;
-int             num_screens;
+Display *dpy;
+ScreenInfo *screens;
+int initting;
+XFontStruct *font;
+int nostalgia;
+char **myargv;
+char *termprog;
+char *shell;
+Bool shape;
+int _border = 4;
+int _inset = 1;
+int curtime;
+int debug;
+int signalled;
+int num_screens;
 
-Atom            exit_9wm;
-Atom            restart_9wm;
-Atom            wm_state;
-Atom            wm_change_state;
-Atom            wm_protocols;
-Atom            wm_delete;
-Atom            wm_take_focus;
-Atom            wm_colormaps;
-Atom            _9wm_running;
-Atom            _9wm_hold_mode;
+Atom exit_9wm;
+Atom restart_9wm;
+Atom wm_state;
+Atom wm_change_state;
+Atom wm_protocols;
+Atom wm_delete;
+Atom wm_take_focus;
+Atom wm_colormaps;
+Atom _9wm_running;
+Atom _9wm_hold_mode;
 
-char           *fontlist[] = {
+char *fontlist[] = {
 	"-*-dejavu sans-bold-r-*-*-14-*-*-*-p-*-*-*",
 	"-adobe-helvetica-bold-r-*-*-14-*-*-*-p-*-*-*",
 	"lucm.latin1.9",
@@ -74,9 +74,9 @@ usage(void)
 int
 main(int argc, char *argv[])
 {
-	int             i, do_exit, do_restart;
-	char           *fname;
-	int             shape_event, dummy;
+	int i, do_exit, do_restart;
+	char *fname;
+	int shape_event, dummy;
 
 	myargv = argv;		/* for restart */
 
@@ -206,9 +206,9 @@ main(int argc, char *argv[])
 void
 initscreen(ScreenInfo * s, int i)
 {
-	char           *ds, *colon, *dot1;
-	unsigned long   mask;
-	XGCValues       gv;
+	char *ds, *colon, *dot1;
+	unsigned long mask;
+	XGCValues gv;
 	XSetWindowAttributes attr;
 
 	s->num = i;
@@ -256,10 +256,10 @@ initscreen(ScreenInfo * s, int i)
 	s->menuwin = XCreateSimpleWindow(dpy, s->root, 0, 0, 1, 1, 1, s->black, s->white);
 }
 
-ScreenInfo     *
+ScreenInfo *
 getscreen(Window w)
 {
-	int             i;
+	int i;
 
 	for (i = 0; i < num_screens; i++)
 		if (screens[i].root == w)
@@ -271,7 +271,7 @@ getscreen(Window w)
 Time
 timestamp(void)
 {
-	XEvent          ev;
+	XEvent ev;
 
 	if (curtime == CurrentTime) {
 		XChangeProperty(dpy, screens[0].root, _9wm_running, _9wm_running, 8, PropModeAppend, (unsigned char *) "", 0);
@@ -284,9 +284,9 @@ timestamp(void)
 void
 sendcmessage(Window w, Atom a, long x, int isroot)
 {
-	XEvent          ev;
-	int             status;
-	long            mask;
+	XEvent ev;
+	int status;
+	long mask;
 
 	memset(&ev, 0, sizeof(ev));
 	ev.xclient.type = ClientMessage;
@@ -305,7 +305,7 @@ sendcmessage(Window w, Atom a, long x, int isroot)
 
 void
 sendconfig(c)
-     Client         *c;
+     Client *c;
 {
 	XConfigureEvent ce;
 
@@ -331,9 +331,9 @@ sighandler(void)
 void
 getevent(XEvent * e)
 {
-	int             fd;
-	fd_set          rfds;
-	struct timeval  t;
+	int fd;
+	fd_set rfds;
+	struct timeval t;
 
 	if (!signalled) {
 		if (QLength(dpy) > 0) {
@@ -371,9 +371,9 @@ getevent(XEvent * e)
 void
 cleanup(void)
 {
-	Client         *c, *cc[2], *next;
-	XWindowChanges  wc;
-	int             i;
+	Client *c, *cc[2], *next;
+	XWindowChanges wc;
+	int i;
 
 	/*
 	 * order of un-reparenting determines final stacking order... 

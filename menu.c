@@ -13,11 +13,11 @@
 #include "dat.h"
 #include "fns.h"
 
-Client         *hiddenc[MAXHIDDEN];
+Client *hiddenc[MAXHIDDEN];
 
-int             numhidden;
+int numhidden;
 
-char           *b3items[B3FIXED + MAXHIDDEN + 1] = {
+char *b3items[B3FIXED + MAXHIDDEN + 1] = {
 	"New",
 	"Reshape",
 	"Move",
@@ -26,21 +26,21 @@ char           *b3items[B3FIXED + MAXHIDDEN + 1] = {
 	0,
 };
 
-Menu            b3menu = {
+Menu b3menu = {
 	b3items,
 };
 
-Menu            egg = {
+Menu egg = {
 	version,
 };
 
 void
 button(XButtonEvent * e)
 {
-	int             n, shift;
-	Client         *c;
-	Window          dw;
-	ScreenInfo     *s;
+	int n, shift;
+	Client *c;
+	Window dw;
+	ScreenInfo *s;
 
 	curtime = e->time;
 	s = getscreen(e->root);
@@ -120,9 +120,9 @@ spawn(ScreenInfo * s)
 
 void
 reshape(c)
-     Client         *c;
+     Client *c;
 {
-	int             odx, ody;
+	int odx, ody;
 
 	if (c == 0)
 		return;
@@ -142,7 +142,7 @@ reshape(c)
 
 void
 move(c)
-     Client         *c;
+     Client *c;
 {
 	if (c == 0)
 		return;
@@ -157,8 +157,8 @@ move(c)
 
 void
 delete(c, shift)
-     Client         *c;
-     int             shift;
+     Client *c;
+     int shift;
 {
 	if (c == 0)
 		return;
@@ -169,7 +169,7 @@ delete(c, shift)
 }
 
 void
-hide(Client *c)
+hide(Client * c)
 {
 	int i;
 
@@ -184,10 +184,10 @@ hide(Client *c)
 	setwstate(c, IconicState);
 	if (c == current)
 		nofocus();
-		
+
 	for (i = numhidden; i > 0; i -= 1) {
-		hiddenc[i] = hiddenc[i-1];
-		b3items[B3FIXED+i] = b3items[B3FIXED+i-1];
+		hiddenc[i] = hiddenc[i - 1];
+		b3items[B3FIXED + i] = b3items[B3FIXED + i - 1];
 	}
 	hiddenc[0] = c;
 	b3items[B3FIXED] = c->label;
@@ -197,8 +197,8 @@ hide(Client *c)
 void
 unhide(int n, int map)
 {
-	Client         *c;
-	int             i;
+	Client *c;
+	int i;
 
 	if (n >= numhidden) {
 		fprintf(stderr, "9wm: unhide: n %d numhidden %d\n", n, numhidden);
@@ -228,10 +228,10 @@ unhide(int n, int map)
 
 void
 unhidec(c, map)
-     Client         *c;
-     int             map;
+     Client *c;
+     int map;
 {
-	int             i;
+	int i;
 
 	for (i = 0; i < numhidden; i++)
 		if (c == hiddenc[i]) {
@@ -243,10 +243,10 @@ unhidec(c, map)
 
 void
 renamec(c, name)
-     Client         *c;
-     char           *name;
+     Client *c;
+     char *name;
 {
-	int             i;
+	int i;
 
 	if (name == 0)
 		name = "???";

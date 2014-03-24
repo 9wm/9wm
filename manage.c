@@ -13,15 +13,13 @@
 #include "fns.h"
 
 int
-manage(c, mapped)
-     Client         *c;
-     int             mapped;
+manage(Client * c, int mapped)
 {
-	int             fixsize, dohide, doreshape, state;
-	long            msize;
-	XClassHint      class;
-	XWMHints       *hints;
-	static int      offset = 0;
+	int fixsize, dohide, doreshape, state;
+	long msize;
+	XClassHint class;
+	XWMHints *hints;
+	static int offset = 0;
 
 	trace("manage", c, 0);
 	XSelectInput(dpy, c->window, ColormapChangeMask | EnterWindowMask | PropertyChangeMask | FocusChangeMask);
@@ -145,9 +143,9 @@ manage(c, mapped)
 void
 scanwins(ScreenInfo * s)
 {
-	unsigned int    i, nwins;
-	Client         *c;
-	Window          dw1, dw2, *wins;
+	unsigned int i, nwins;
+	Client *c;
+	Window dw1, dw2, *wins;
 	XWindowAttributes attr;
 
 	XQueryTree(dpy, s->root, &dw1, &dw2, &wins, &nwins);
@@ -172,10 +170,9 @@ scanwins(ScreenInfo * s)
 }
 
 void
-gettrans(c)
-     Client         *c;
+gettrans(Client * c)
 {
-	Window          trans;
+	Window trans;
 
 	trans = None;
 	if (XGetTransientForHint(dpy, c->window, &trans) != 0)
@@ -185,8 +182,7 @@ gettrans(c)
 }
 
 void
-withdraw(c)
-     Client         *c;
+withdraw(Client * c)
 {
 	XUnmapWindow(dpy, c->parent);
 	gravitate(c, 1);
@@ -204,11 +200,9 @@ withdraw(c)
 }
 
 void
-gravitate(c, invert)
-     Client         *c;
-     int             invert;
+gravitate(Client * c, int invert)
 {
-	int             gravity, dx, dy, delta;
+	int gravity, dx, dy, delta;
 
 	gravity = NorthWestGravity;
 	if (c->size.flags & PWinGravity)
@@ -277,11 +271,10 @@ installcmap(ScreenInfo * s, Colormap cmap)
 }
 
 void
-cmapfocus(c)
-     Client         *c;
+cmapfocus(Client * c)
 {
-	int             i, found;
-	Client         *cc;
+	int i, found;
+	Client *cc;
 
 	if (c == 0)
 		return;
@@ -307,11 +300,10 @@ cmapnofocus(ScreenInfo * s)
 }
 
 void
-getcmaps(c)
-     Client         *c;
+getcmaps(Client * c)
 {
-	int             n, i;
-	Window         *cw;
+	int n, i;
+	Window *cw;
 	XWindowAttributes attr;
 
 	if (!c->init) {
@@ -345,10 +337,9 @@ getcmaps(c)
 }
 
 void
-setlabel(c)
-     Client         *c;
+setlabel(Client * c)
 {
-	char           *label, *p;
+	char *label, *p;
 
 	if (c->iconname != 0)
 		label = c->iconname;
@@ -371,11 +362,10 @@ setlabel(c)
 
 #ifdef	SHAPE
 void
-setshape(c)
-     Client         *c;
+setshape(Client * c)
 {
-	int             n, order;
-	XRectangle     *rect;
+	int n, order;
+	XRectangle *rect;
 
 	/*
 	 * don't try to add a border if the window is non-rectangular 
@@ -388,13 +378,12 @@ setshape(c)
 #endif
 
 int
-_getprop(Window w, Atom a, Atom type, long len,	/* in 32-bit multiples... */
-	 unsigned char **p)
+_getprop(Window w, Atom a, Atom type, long len, unsigned char **p)
 {
-	Atom            real_type;
-	int             format;
-	unsigned long   n, extra;
-	int             status;
+	Atom real_type;
+	int format;
+	unsigned long n, extra;
+	int status;
 
 	status = XGetWindowProperty(dpy, w, a, 0L, len, False, type, &real_type, &format, &n, &extra, p);
 	if (status != Success || *p == 0)
@@ -407,10 +396,10 @@ _getprop(Window w, Atom a, Atom type, long len,	/* in 32-bit multiples... */
 	return n;
 }
 
-char           *
+char *
 getprop(Window w, Atom a)
 {
-	unsigned char  *p;
+	unsigned char *p;
 
 	if (_getprop(w, a, XA_STRING, 100L, &p) <= 0)
 		return 0;
@@ -420,13 +409,15 @@ getprop(Window w, Atom a)
 int
 get1prop(Window w, Atom a, Atom type)
 {
-	char          **p, *x;
+	unsigned char *p;
+	int ret;
 
-	if (_getprop(w, a, type, 1L, &p) <= 0)
+	if (_getprop(w, a, type, 1L, &p) <= 0) {
 		return 0;
-	x = *p;
+	}
+	ret = (int) (unsigned long int) (*p);
 	XFree((void *) p);
-	return (int) ((unsigned long int) x);
+	return ret;
 }
 
 Window
@@ -442,11 +433,9 @@ getiprop(Window w, Atom a)
 }
 
 void
-setwstate(c, state)
-     Client         *c;
-     int             state;
+setwstate(Client * c, int state)
 {
-	long            data[2];
+	long data[2];
 
 	data[0] = (long) state;
 	data[1] = (long) None;
@@ -458,9 +447,9 @@ setwstate(c, state)
 int
 getwstate(Window w, int *state)
 {
-	long           *p = 0;
+	long *p = 0;
 
-	if (_getprop(w, wm_state, wm_state, 2L, (char **) &p) <= 0)
+	if (_getprop(w, wm_state, wm_state, 2L, (unsigned char **) &p) <= 0)
 		return 0;
 
 	*state = (int) *p;
@@ -469,17 +458,16 @@ getwstate(Window w, int *state)
 }
 
 void
-getproto(c)
-     Client         *c;
+getproto(Client * c)
 {
-	Atom           *p;
-	int             i;
-	long            n;
-	Window          w;
+	Atom *p;
+	int i;
+	long n;
+	Window w;
 
 	w = c->window;
 	c->proto = 0;
-	if ((n = _getprop(w, wm_protocols, XA_ATOM, 20L, (char **) &p)) <= 0)
+	if ((n = _getprop(w, wm_protocols, XA_ATOM, 20L, (unsigned char **) &p)) <= 0)
 		return;
 
 	for (i = 0; i < n; i++)

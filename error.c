@@ -10,7 +10,7 @@
 #include "dat.h"
 #include "fns.h"
 
-int             ignore_badwindow;
+int ignore_badwindow;
 
 void
 fatal(char *s)
@@ -24,7 +24,7 @@ fatal(char *s)
 int
 handler(Display * d, XErrorEvent * e)
 {
-	char            msg[80], req[80], number[80];
+	char msg[80], req[80], number[80];
 
 	if (initting && (e->request_code == X_ChangeWindowAttributes) && (e->error_code == BadAccess)) {
 		fprintf(stderr, "9wm: it looks like there's already a window manager running;  9wm not started\n");
@@ -53,7 +53,7 @@ void
 graberror(char *f, int err)
 {
 #ifdef	DEBUG			/* sick of "bug" reports; grab errors "just happen" */
-	char           *s;
+	char *s;
 
 	switch (err) {
 	case GrabNotViewable:

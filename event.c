@@ -15,7 +15,7 @@
 void
 mainloop(int shape_event)
 {
-	XEvent          ev;
+	XEvent ev;
 
 	for (;;) {
 		getevent(&ev);
@@ -104,8 +104,8 @@ mainloop(int shape_event)
 void
 configurereq(XConfigureRequestEvent * e)
 {
-	XWindowChanges  wc;
-	Client         *c;
+	XWindowChanges wc;
+	Client *c;
 
 	/*
 	 * we don't set curtime as nothing here uses it 
@@ -168,8 +168,8 @@ configurereq(XConfigureRequestEvent * e)
 void
 mapreq(XMapRequestEvent * e)
 {
-	Client         *c;
-	int             i;
+	Client *c;
+	int i;
 
 	curtime = CurrentTime;
 	c = getclient(e->window, 0);
@@ -218,7 +218,7 @@ mapreq(XMapRequestEvent * e)
 void
 unmap(XUnmapEvent * e)
 {
-	Client         *c;
+	Client *c;
 
 	curtime = CurrentTime;
 	c = getclient(e->window, 0);
@@ -250,8 +250,8 @@ circulatereq(XCirculateRequestEvent * e)
 void
 newwindow(XCreateWindowEvent * e)
 {
-	Client         *c;
-	ScreenInfo     *s;
+	Client *c;
+	ScreenInfo *s;
 
 	/*
 	 * we don't set curtime as nothing here uses it 
@@ -274,7 +274,7 @@ newwindow(XCreateWindowEvent * e)
 void
 destroy(Window w)
 {
-	Client         *c;
+	Client *c;
 
 	curtime = CurrentTime;
 	c = getclient(w, 0);
@@ -294,7 +294,7 @@ destroy(Window w)
 void
 clientmesg(XClientMessageEvent * e)
 {
-	Client         *c;
+	Client *c;
 
 	curtime = CurrentTime;
 	if (e->message_type == exit_9wm) {
@@ -324,8 +324,8 @@ clientmesg(XClientMessageEvent * e)
 void
 cmap(XColormapEvent * e)
 {
-	Client         *c;
-	int             i;
+	Client *c;
+	int i;
 
 	/*
 	 * we don't set curtime as nothing here uses it 
@@ -352,9 +352,9 @@ cmap(XColormapEvent * e)
 void
 property(XPropertyEvent * e)
 {
-	Atom            a;
-	int             delete;
-	Client         *c;
+	Atom a;
+	int delete;
+	Client *c;
 
 	/*
 	 * we don't set curtime as nothing here uses it 
@@ -398,9 +398,9 @@ property(XPropertyEvent * e)
 void
 reparent(XReparentEvent * e)
 {
-	Client         *c;
+	Client *c;
 	XWindowAttributes attr;
-	ScreenInfo     *s;
+	ScreenInfo *s;
 
 	/*
 	 * we don't set curtime as nothing here uses it 
@@ -430,9 +430,9 @@ reparent(XReparentEvent * e)
 #ifdef	SHAPE
 void
 shapenotify(e)
-     XShapeEvent    *e;
+     XShapeEvent *e;
 {
-	Client         *c;
+	Client *c;
 
 	/*
 	 * we don't set curtime as nothing here uses it 
@@ -448,7 +448,7 @@ shapenotify(e)
 void
 enter(XCrossingEvent * e)
 {
-	Client         *c;
+	Client *c;
 
 	curtime = e->time;
 	if (e->mode != NotifyGrab || e->detail != NotifyNonlinearVirtual)
@@ -467,7 +467,7 @@ enter(XCrossingEvent * e)
 void
 focusin(XFocusChangeEvent * e)
 {
-	Client         *c;
+	Client *c;
 
 	curtime = CurrentTime;
 	if (e->detail != NotifyNonlinearVirtual)
