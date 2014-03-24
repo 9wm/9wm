@@ -10,8 +10,7 @@
 #include "fns.h"
 
 int
-nobuttons(			/* Einstuerzende */
-		 XButtonEvent * e)
+nobuttons(XButtonEvent * e)
 {
 	int             state;
 
@@ -165,13 +164,11 @@ menuhit(XButtonEvent * e, Menu * m)
 		case Expose:
 			XClearWindow(dpy, s->menuwin);
 			for (i = 0; i < n; i++) {
-				char *item;
+				char *item = m->item[i];
 
 				if (i < 5) {
-					item = m->item[i];
 					tx = (wide - XTextWidth(font, item, strlen(item))) / 2;
 				} else {
-					item = m->item[n - i + 4];
 					tx = 1;
 				}
 				ty = i * high + font->ascent + 1;

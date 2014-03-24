@@ -169,9 +169,10 @@ delete(c, shift)
 }
 
 void
-hide(c)
-     Client         *c;
+hide(Client *c)
 {
+	int i;
+
 	if (c == 0 || numhidden == MAXHIDDEN)
 		return;
 	if (hidden(c)) {
@@ -183,10 +184,14 @@ hide(c)
 	setwstate(c, IconicState);
 	if (c == current)
 		nofocus();
-	hiddenc[numhidden] = c;
-	b3items[B3FIXED + numhidden] = c->label;
+		
+	for (i = numhidden; i > 0; i -= 1) {
+		hiddenc[i] = hiddenc[i-1];
+		b3items[B3FIXED+i] = b3items[B3FIXED+i-1];
+	}
+	hiddenc[0] = c;
+	b3items[B3FIXED] = c->label;
 	numhidden++;
-	b3items[B3FIXED + numhidden] = 0;
 }
 
 void
