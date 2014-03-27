@@ -182,10 +182,7 @@ menuhit(XButtonEvent * e, Menu * m)
 }
 
 Client *
-selectwin(release, shift, s)
-     int release;
-     int *shift;
-     ScreenInfo *s;
+selectwin(int release, int *shift, ScreenInfo * s)
 {
 	XEvent ev;
 	XButtonEvent *e;
@@ -230,10 +227,7 @@ selectwin(release, shift, s)
 }
 
 void
-sweepcalc(c, x, y)
-     Client *c;
-     int x;
-     int y;
+sweepcalc(Client * c, int x, int y)
 {
 	int dx, dy, sx, sy;
 
@@ -275,18 +269,14 @@ sweepcalc(c, x, y)
 }
 
 void
-dragcalc(c, x, y)
-     Client *c;
-     int x;
-     int y;
+dragcalc(Client * c, int x, int y)
 {
 	c->x = x;
 	c->y = y;
 }
 
 void
-drawbound(c)
-     Client *c;
+drawbound(Client * c)
 {
 	int x, y, dx, dy;
 	ScreenInfo *s;
@@ -321,10 +311,7 @@ misleep(int msec)
 }
 
 int
-sweepdrag(c, e0, recalc)
-     Client *c;
-     XButtonEvent *e0;
-     void (*recalc) ();
+sweepdrag(Client * c, XButtonEvent * e0, void (*recalc) ())
 {
 	XEvent ev;
 	int idle;
@@ -406,8 +393,7 @@ sweepdrag(c, e0, recalc)
 }
 
 int
-sweep(c)
-     Client *c;
+sweep(Client * c)
 {
 	XEvent ev;
 	int status;
@@ -434,8 +420,7 @@ sweep(c)
 }
 
 int
-drag(c)
-     Client *c;
+drag(Client * c)
 {
 	int status;
 	ScreenInfo *s;

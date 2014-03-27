@@ -341,16 +341,17 @@ setlabel(Client * c)
 {
 	char *label, *p;
 
-	if (c->iconname != 0)
+	if (c->iconname != 0) {
 		label = c->iconname;
-	else if (c->name != 0)
+	} else if (c->name != 0) {
 		label = c->name;
-	else if (c->instance != 0)
+	} else if (c->instance != 0) {
 		label = c->instance;
-	else if (c->class != 0)
+	} else if (c->class != 0) {
 		label = c->class;
-	else
+	} else {
 		label = "no label";
+	}
 	if ((p = strrchr(label, '-'))) {
 		label = p + 1;
 	}
@@ -401,8 +402,9 @@ getprop(Window w, Atom a)
 {
 	unsigned char *p;
 
-	if (_getprop(w, a, XA_STRING, 100L, &p) <= 0)
+	if (_getprop(w, a, XA_STRING, 100L, &p) <= 0) {
 		return 0;
+	}
 	return (char *) p;
 }
 

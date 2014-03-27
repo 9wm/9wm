@@ -145,6 +145,15 @@ with dashes: "blah blah - blah blah - Chromium".
 For this reason,
 9wm chops off everything before and including the rightmost dash.
 
+9wm doesn't have Unicode support.
+In particular, if you have a browser page open with non-Latin characters in the name,
+and you hite that window,
+you will get a weird name for that window's entry in the list.
+Doing Unicode in X11 is a horrible mess requiring,
+among other things, a whole new library for rendering text.
+I may get to this in the future, but for now,
+I feel like learning about Wayland is a better use of my effort.
+
 
 See Also
 ========
