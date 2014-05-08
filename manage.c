@@ -19,7 +19,6 @@ manage(Client * c, int mapped)
 	long msize;
 	XClassHint class;
 	XWMHints *hints;
-	static int offset = 0;
 
 	trace("manage", c, 0);
 	XSelectInput(dpy, c->window, ColormapChangeMask | EnterWindowMask | PropertyChangeMask | FocusChangeMask);
@@ -96,9 +95,28 @@ manage(Client * c, int mapped)
 	 */
 
 	if (doreshape) {
-		c->x = offset;
-		c->y = offset;
-		offset = (offset + 20) % 100;
+		int xmax = DisplayWidth(dpy, c->screen->num);
+		int ymax = DisplayHeight(dpy, c->screen->num);
+		int x, y;
+
+		getmouse(&x, &y, c->screen);
+
+		c->x = x - (c->dx / 2);
+		c->y = y - (c->dy / 2);
+		
+		if (c->x + c->dx > xmax) {
+			c->x = xmax - c->dx;
+		}
+		if (c->x < 0) {
+			c->x = 0;
+		}
+		
+		if (c->y + c->dy > ymax) {
+			c->y = ymax - c->dy;
+		}
+		if (c->y < 0) {
+			c->y = 0;
+		}
 	}
 	gravitate(c, 0);
 

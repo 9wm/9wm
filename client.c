@@ -14,9 +14,7 @@ Client *clients;
 Client *current;
 
 void
-setactive(c, on)
-     Client *c;
-     int on;
+setactive(Client *c, int on)
 {
 	if (c->parent == c->screen->root) {
 		fprintf(stderr, "9wm: bad parent in setactive; dumping core\n");
@@ -34,9 +32,7 @@ setactive(c, on)
 }
 
 void
-draw_border(c, active)
-     Client *c;
-     int active;
+draw_border(Client *c, int active)
 {
 	XSetWindowBackground(dpy, c->parent, active ? c->screen->black : c->screen->white);
 	XClearWindow(dpy, c->parent);
@@ -45,8 +41,7 @@ draw_border(c, active)
 }
 
 void
-active(c)
-     Client *c;
+active(Client *c)
 {
 	Client *cc;
 
@@ -106,8 +101,7 @@ nofocus(void)
 }
 
 void
-top(c)
-     Client *c;
+top(Client *c)
 {
 	Client **l, *cc;
 
@@ -125,9 +119,7 @@ top(c)
 }
 
 Client *
-getclient(w, create)
-     Window w;
-     int create;
+getclient(Window w, int create)
 {
 	Client *c;
 
@@ -165,8 +157,7 @@ getclient(w, create)
 }
 
 void
-rmclient(c)
-     Client *c;
+rmclient(Client *c)
 {
 	Client *cc;
 
