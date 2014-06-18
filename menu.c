@@ -61,8 +61,11 @@ button(XButtonEvent * e)
 		}
 		return;
 	case Button2:
-		if ((e->state & (ShiftMask | ControlMask)) == (ShiftMask | ControlMask))
+		if ((e->state & (ShiftMask | ControlMask)) == (ShiftMask | ControlMask)) {
 			menuhit(e, &egg);
+		} else {
+			spawn(s, "mm mouse2");
+		}
 		return;
 	default:
 		return;
@@ -74,7 +77,7 @@ button(XButtonEvent * e)
 		cmapnofocus(s);
 	switch (n = menuhit(e, &b3menu)) {
 	case 0:		/* New */
-		spawn(s);
+		spawn(s, termprog);
 		break;
 	case 1:		/* Reshape */
 		reshape(selectwin(1, 0, s));
@@ -101,14 +104,16 @@ button(XButtonEvent * e)
 }
 
 void
-spawn(ScreenInfo * s)
+spawn(ScreenInfo * s, char *prog)
 {
 	if (fork() == 0) {
 		close(ConnectionNumber(dpy));
-		if (s->display[0] != '\0')
+		if (s->display[0] != '\0') {
 			putenv(s->display);
-		if (termprog != NULL) {
-			execl(shell, shell, "-c", termprog, NULL);
+		}
+		
+		if (prog != NULL) {
+			execl(shell, shell, "-c", prog, NULL);
 			fprintf(stderr, "9wm: exec %s", shell);
 			perror(" failed");
 		}
