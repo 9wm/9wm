@@ -45,6 +45,7 @@ Middle-click anywhere other than the focused window
 to run "mm mouse2".
 It's up to you to write an "mm" program and put it in your path somewhere,
 if you want to use this for something.
+I have mine run "google-chrome-stable --show-app-list".
 
 
 What if I find a bug?
