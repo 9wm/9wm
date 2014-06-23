@@ -79,7 +79,7 @@ I run "9wm restart" to make it quickly reset its internal state and notice any c
 
 9wm doesn't have Unicode support.
 In particular, if you have a browser page open with non-Latin characters in the name,
-and you hite that window,
+and you hide that window,
 you will get a weird name for that window's entry in the list.
 Doing Unicode in X11 is a horrible mess requiring,
 among other things, a whole new library for rendering text.
