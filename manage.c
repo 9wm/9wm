@@ -370,8 +370,8 @@ setlabel(Client * c)
 	} else {
 		label = "no label";
 	}
-	if ((p = strrchr(label, '-'))) {
-		label = p + 1;
+	while ((p = strstr(label, " - "))) {
+		label = p + 3;
 	}
 	if ((p = strchr(label, ':')) != 0)
 		*p = '\0';
@@ -420,7 +420,7 @@ getprop(Window w, Atom a)
 {
 	unsigned char *p;
 
-	if (_getprop(w, a, XA_STRING, 100L, &p) <= 0) {
+	if (_getprop(w, a, utf8_string, 100L, &p) <= 0) {
 		return 0;
 	}
 	return (char *) p;

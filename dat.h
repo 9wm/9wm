@@ -122,6 +122,7 @@ extern Atom 		wm_protocols;
 extern Atom 		wm_delete;
 extern Atom 		wm_take_focus;
 extern Atom 		wm_colormaps;
+extern Atom			utf8_string;
 
 /* client.c */
 extern Client		*clients;

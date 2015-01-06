@@ -1,8 +1,5 @@
 * Don't warp mouse pointer for Move
 * Update function declarations to modern C (as I touch them)
-* Urgent hints
-	* c->name = ":: " .. c->name .. " ::"
-	* Maybe different font or color? But this violiates 0-1-many
-	* Maybe uniconify and raise?
+* Urgent hints (c->name = ":: " .. c->name .. " ::")
 * Bring back placement of xterm launched by "New" (like rio)
 * How is rio placing Google Hangouts popups in the southeast?
