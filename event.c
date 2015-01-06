@@ -318,7 +318,14 @@ clientmesg(XClientMessageEvent * e)
 				e->format, e->data.l[0], (int) e->window);
 		return;
 	}
-	fprintf(stderr, "9wm: strange ClientMessage, type 0x%x window 0x%x\n", (int) e->message_type, (int) e->window);
+	
+	{
+		char *name;
+		
+		name = XGetAtomName(dpy, e->message_type);
+		fprintf(stderr, "9wm: strange ClientMessage %s (%d),  window 0x%x\n", name, (int) e->message_type, (int) e->window);
+		XFree(name);
+	}
 }
 
 void
