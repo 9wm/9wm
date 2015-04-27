@@ -300,15 +300,13 @@ clientmesg(XClientMessageEvent * e)
 	if (e->message_type == exit_9wm) {
 		cleanup();
 		exit(0);
-	}
-	if (e->message_type == restart_9wm) {
+	} else if (e->message_type == restart_9wm) {
 		fprintf(stderr, "*** 9wm restarting ***\n");
 		cleanup();
 		execvp(myargv[0], myargv);
 		perror("9wm: exec failed");
 		exit(1);
-	}
-	if (e->message_type == wm_change_state) {
+	} else if (e->message_type == wm_change_state) {
 		c = getclient(e->window, 0);
 		if (e->format == 32 && e->data.l[0] == IconicState && c != 0) {
 			if (normal(c))
@@ -316,14 +314,21 @@ clientmesg(XClientMessageEvent * e)
 		} else
 			fprintf(stderr, "9wm: WM_CHANGE_STATE: format %d data %ld w 0x%x\n",
 				e->format, e->data.l[0], (int) e->window);
+	} else if ((e->message_type == wm_moveresize) && (e->data.l[2] == 8)) {
+		Client *c = getclient(e->window, 0);
+		move(c);
 		return;
-	}
-	
-	{
+	} else if (e->message_type == active_window) {
+		Client *c = getclient(e->window, 0);
+		XMapRaised(dpy, c->parent);
+		top(c);
+		active(c);
+		return;
+	} else {
 		char *name;
 		
 		name = XGetAtomName(dpy, e->message_type);
-		fprintf(stderr, "9wm: strange ClientMessage %s (%d),  window 0x%x\n", name, (int) e->message_type, (int) e->window);
+		fprintf(stderr, "9wm: unhandled ClientMessage %s (%d),  window 0x%x\n", name, (int) e->message_type, (int) e->window);
 		XFree(name);
 	}
 }

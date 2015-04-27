@@ -146,8 +146,7 @@ reshape(c)
 }
 
 void
-move(c)
-     Client *c;
+move(Client *c)
 {
 	if (c == 0)
 		return;

@@ -364,8 +364,6 @@ sweepdrag(Client * c, XButtonEvent * e0, void (*recalc) ())
 			drawbound(c);
 			ungrab(e);
 			XUngrabServer(dpy);
-			if (e->button != Button3 && c->init)
-				goto bad;
 			recalc(c, ev.xbutton.x, ev.xbutton.y);
 			if (c->dx < 0) {
 				c->x += c->dx;
