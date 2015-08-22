@@ -404,6 +404,8 @@ property(XPropertyEvent * e)
 		getcmaps(c);
 		if (c == current)
 			cmapfocus(c);
+	} else if (a == wm_protocols) {
+		getproto(c);
 	}
 }
 
