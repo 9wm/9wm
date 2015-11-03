@@ -1,4 +1,5 @@
 People Who've Helped
 ====================
 
+* Jacob Adams <tookmund@gmail.com> contributed a patch to help ease Debian packaging
 * Dave Conroy <dgc@fpgaretrocomputing.org> contributed a patch to fix event handling with xforms-toolkit
