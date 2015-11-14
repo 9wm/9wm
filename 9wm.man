@@ -72,13 +72,6 @@ process (or
 if
 .I 9term
 is not available).
-The new
-.I 9term
-will request that its outline be swept using button 3
-of the mouse, by changing the cursor.
-.RI ( xterm
-defaults to a fixed size, and thus wants to be dragged; pressing
-button 3 places it.)
 .PP
 The next four menu items are
 .IR Reshape ,

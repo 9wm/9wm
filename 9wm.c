@@ -16,7 +16,7 @@
 #include "fns.h"
 
 char *version[] = {
-	"9wm version 1.3.3, Copyright © 2015 multiple authors", 0,
+	"9wm version 1.3.4, Copyright © 2015 multiple authors", 0,
 };
 
 Display *dpy;
