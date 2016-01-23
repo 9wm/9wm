@@ -3,7 +3,7 @@ License
 
 Copyright © 1994-1996 David Hogan  
 Copyright © 2009 The Estate of David Hogan  
-Copyright © 2014 Neale Pickett
+Copyright © 2014-2016 Neale Pickett
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the "Software"),
