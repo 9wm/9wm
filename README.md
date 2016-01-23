@@ -7,9 +7,12 @@ It is click-to-type.
 It uses the X11 font system (which, unfortunately, means no Unicode support).
 
 9wm does not provide virtual desktops, customization, key bindings,
-or compositing.
+EWMH support, or compositing.
 It does not allocate any colors,
 which will be great news if you are stuck in 1993.
+
+It is a great place to start if you are interested in writing a window manager from scratch:
+many folks have done exactly this.
 
 9wm is distributed under [an MIT License](LICENSE.md).
 
