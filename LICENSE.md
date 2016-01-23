@@ -1,4 +1,4 @@
-Licence
+License
 =======
 
 Copyright © 1994-1996 David Hogan  
