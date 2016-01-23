@@ -54,9 +54,8 @@ I have mine run "google-chrome-stable --show-app-list".
 What if I find a bug?
 =====================
 
-Please mail all bug reports to neale@woozle.org, so
-that I can incorporate fixes into the next release.  If you can
-tell me how to fix it, all the better.
+Please submit it to [Github](https://github.com/nealey/9wm/issues)
+If you can fix it, submit the fix as a pull request.
 
 
 Known Problems/Bugs
