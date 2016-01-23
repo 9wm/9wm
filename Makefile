@@ -1,8 +1,8 @@
-CFLAGS = -DSHAPE -Wall -Werror
+CFLAGS += -DSHAPE -Wall -Werror
 LDLIBS = -lXext -lX11
-BIN = $(DESTDIR)/usr/bin/X11
+BIN = $(DESTDIR)/usr/bin/
 
-MANDIR = $(DESTDIR)/usr/man/man1
+MANDIR = $(DESTDIR)/usr/share/man/man1
 MANSUFFIX = 1
 
 all: 9wm
