@@ -1,7 +1,7 @@
 9wm
 ====
 
-9wm is an X11 window manager inspired by the Plan 9 window manager 8½.
+9wm is an X11 window manager inspired by the Plan 9 window manager rio.
 It provides a very simple and clean user interface.
 It is click-to-type.
 It uses the X11 font system (which, unfortunately, means no Unicode support).
