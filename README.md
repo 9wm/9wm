@@ -89,6 +89,8 @@ among other things, a whole new library for rendering text.
 I may get to this in the future, but for now,
 I feel like learning about Wayland is a better use of my effort.
 
+Lack of EWMH means some applications (especially games) will break when 
+trying to go fullscreen.
 
 Authors
 =======
