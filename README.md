@@ -11,7 +11,7 @@ or compositing.
 It does not allocate any colors,
 which will be great news if you are stuck in 1993.
 
-9wm is distributed under [an MIT License](LICENSE).
+9wm is distributed under [an MIT License](LICENSE.md).
 
 
 Where do I get it?
@@ -91,41 +91,18 @@ I feel like learning about Wayland is a better use of my effort.
 Acknowledgements
 ================
 
-Thanks to the late David Hogan for writing 9wm.
-
-Thanks to Rob Pike for writing the original 8-1/2 program (and
-before that, mux) which inspired the writing of 9wm.
-
-Thanks to John Mackin, whose gwm "wool code" for emulating mux
-was also an inspiration: I used it (and hacked it) until I got
-too frustrated with gwm's large memory requirements and lack of
-speed (sorry Colas!), and decided to write a dedicated program.
-
-Thanks to Matthew Farrow for writing 9term.
-
-A big thanks to Dave Edmondson for adding support for
-multi-screen displays.
-
-The following people helped beta test 9wm:
-
-	John Mackin
-	Noel Hunt
-	Fred Curtis
-	James Matthew Farrow
-	Danny Yee
-	Arnold Robbins
-	Byron Rakitzis
-	micro@cooper.edu
+See [the credits](CREDITS.md)
 
 
-Author
-======
+Authors
+=======
+
+9wm is maintained by Neale Pickett <neale@woozle.org>.
 
 9wm was written by David Hogan (dhog@cs.su.oz.au), a postgraduate
 student at the Basser Department of Computer Science, University
 of Sydney <http://unauthorised.org/dhog/index.html>
-
 David Hogan died in 2003.
-9wm is now maintained by Neale Pickett <neale@woozle.org>.
+
 
 
