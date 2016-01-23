@@ -87,15 +87,10 @@ I may get to this in the future, but for now,
 I feel like learning about Wayland is a better use of my effort.
 
 
-
-Acknowledgements
-================
-
-See [the credits](CREDITS.md)
-
-
 Authors
 =======
+
+See [the credits](CREDITS.md) for a full list of everybody who's helped.
 
 9wm is maintained by Neale Pickett <neale@woozle.org>.
 
