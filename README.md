@@ -1,5 +1,5 @@
-9wm Version 1.3.4
-=================
+9wm
+====
 
 9wm is an X11 window manager inspired by the Plan 9 window manager 8½.
 It provides a very simple and clean user interface.
