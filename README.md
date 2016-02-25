@@ -54,9 +54,8 @@ I have mine run "google-chrome-stable --show-app-list".
 What if I find a bug?
 =====================
 
-Please mail all bug reports to neale@woozle.org, so
-that I can incorporate fixes into the next release.  If you can
-tell me how to fix it, all the better.
+Please submit it to [Github](https://github.com/nealey/9wm/issues)
+If you can fix it, submit the fix as a pull request.
 
 
 Known Problems/Bugs
@@ -89,6 +88,8 @@ among other things, a whole new library for rendering text.
 I may get to this in the future, but for now,
 I feel like learning about Wayland is a better use of my effort.
 
+Lack of EWMH means some applications (especially games) will break when 
+trying to go fullscreen.
 
 Authors
 =======
