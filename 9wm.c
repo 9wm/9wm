@@ -34,6 +34,7 @@ int curtime;
 int debug;
 int signalled;
 int num_screens;
+unsigned long bordercolor;
 
 Atom exit_9wm;
 Atom restart_9wm;
@@ -189,6 +190,15 @@ main(int argc, char *argv[])
 
 	for (i = 0; i < num_screens; i++)
 		initscreen(&screens[i], i);
+
+	/*
+	 * Setup color for border
+	 */
+	XColor color;
+	XParseColor(dpy,DefaultColormap(dpy,screens[0].num),"turquoise",&color);
+	XAllocColor(dpy,DefaultColormap(dpy,screens[0].num),&color);
+	bordercolor = color.pixel;
+	fprintf(stderr,"bordercolor: %lu\n",bordercolor);
 
 	/*
 	 * set selection so that 9term knows we're running 
