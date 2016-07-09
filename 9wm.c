@@ -102,7 +102,7 @@ main(int argc, char *argv[])
 			exit(0);
 		} else if (strcmp(argv[i],"-border") == 0 && i + 1 < argc)
 			borderstr = argv[++i];
-		} else if (argv[i][0] == '-')
+		else if (argv[i][0] == '-')
 			usage();
 		else
 			break;
