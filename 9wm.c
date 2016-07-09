@@ -34,6 +34,7 @@ int curtime;
 int debug;
 int signalled;
 int num_screens;
+unsigned long bordercolor;
 
 Atom exit_9wm;
 Atom restart_9wm;
@@ -80,7 +81,7 @@ main(int argc, char *argv[])
 	int i, do_exit, do_restart;
 	char *fname;
 	int shape_event, dummy;
-
+	char *borderstr = "black";
 	myargv = argv;		/* for restart */
 
 	do_exit = do_restart = 0;
@@ -99,7 +100,9 @@ main(int argc, char *argv[])
 		else if (strcmp(argv[i], "-version") == 0) {
 			fprintf(stderr, "%s\n", version[0]);
 			exit(0);
-		} else if (argv[i][0] == '-')
+		} else if (strcmp(argv[i],"-border") == 0 && i + 1 < argc)
+			borderstr = argv[++i];
+		else if (argv[i][0] == '-')
 			usage();
 		else
 			break;
@@ -189,6 +192,17 @@ main(int argc, char *argv[])
 
 	for (i = 0; i < num_screens; i++)
 		initscreen(&screens[i], i);
+
+	/*
+	 * Setup color for border
+	 */
+	XColor color;
+	Status stpc = XParseColor(dpy,DefaultColormap(dpy,screens[0].num),borderstr,&color);
+	Status stac = XAllocColor(dpy,DefaultColormap(dpy,screens[0].num),&color);
+	if (stpc != 0 && stac != 0)
+		bordercolor = color.pixel;
+	else
+		bordercolor = BlackPixel(dpy,screens[0].num);
 
 	/*
 	 * set selection so that 9term knows we're running 

@@ -112,6 +112,7 @@ extern int			_border;
 extern int			_inset;
 extern int			curtime;
 extern int			debug;
+extern unsigned long		bordercolor;
 
 extern Atom		exit_9wm;
 extern Atom		restart_9wm;

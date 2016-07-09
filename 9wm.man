@@ -16,6 +16,9 @@
 .B \-term
 .I termprog
 ] [
+.B \-border
+.I color
+] [
 .BR exit | restart
 ]
 .SH DESCRIPTION
@@ -41,6 +44,9 @@ overriding the default.
 specifies an alternative program to run when the
 .I New
 menu item is selected.
+.B \-border
+.I color
+sets the color of the active window border, which defaults to black.
 .B \-version
 prints the current version on standard error, then exits.
 .PP
