@@ -198,7 +198,6 @@ main(int argc, char *argv[])
 	XParseColor(dpy,DefaultColormap(dpy,screens[0].num),"turquoise",&color);
 	XAllocColor(dpy,DefaultColormap(dpy,screens[0].num),&color);
 	bordercolor = color.pixel;
-	fprintf(stderr,"bordercolor: %lu\n",bordercolor);
 
 	/*
 	 * set selection so that 9term knows we're running 
