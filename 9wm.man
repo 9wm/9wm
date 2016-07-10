@@ -6,7 +6,7 @@
 .SH SYNOPSIS
 .B 9wm
 [
-.B \-grey
+.B \-nostalgia
 ] [
 .B \-version
 ] [
@@ -29,8 +29,9 @@ policies of Plan 9's
 window manager.
 .PP
 The
-.B \-grey
-option makes the background light grey, as does \*(85.
+.B \-nostalgia
+option makes the cursor like Plan9's cursor.
+If passed twice, it will also shrink the size of the window borders.
 Use this option for maximum authenticity.
 .B \-font
 .I fname
