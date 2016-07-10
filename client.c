@@ -17,8 +17,7 @@ void
 setactive(Client *c, int on)
 {
 	if (c->parent == c->screen->root) {
-		fprintf(stderr, "9wm: bad parent in setactive; dumping core\n");
-		abort();
+		return;
 	}
 	if (on) {
 		XUngrabButton(dpy, AnyButton, AnyModifier, c->parent);
