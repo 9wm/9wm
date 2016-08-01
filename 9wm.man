@@ -65,8 +65,7 @@ Prints the current version on standard error, then exits.
 .PP
 A menu of window operations is available by pressing button 3
 outside the current window.
-The first of these,
-.IR New ,
+.IP New
 attempts to spawn a
 .I 9term
 process (or
@@ -75,31 +74,20 @@ if
 .I 9term
 is not available).
 .PP
-The next four menu items are
-.IR Reshape ,
-.IR Move ,
-.IR Delete ,
-and
-.IR Hide .
-All of the operations change the cursor into a target, prompting the user
+All of the next operations change the cursor into a target, prompting the user
 to click button 3 on one of the windows to select it for the operation.
 At this stage, clicking button 1 or 2 will abort the operation.
-Otherwise, if the operation was
-.IR Resize ,
-the user is prompted to sweep out the new outline with button 3.
-If it was
-.IR Move ,
-the user should keep the button held down after the initial click that selected
+.IP Resize
+The user is prompted to sweep out the new outline with button 3.
+.IP Move
+The user should keep the button held down after the initial click that selected
 the window, and drag the window to the right place before releasing.
 In either case, button 1 or 2 will abort the operation.
-.PP
-If the
-.I Delete
-operation is selected, the window will be deleted when the button is released.
+.IP Delete
+The window will be deleted when the button is released.
 This typically kills the client that owns the window.
-The
-.I Hide
-operation just makes the window invisible.  While hidden, the window's
+.IP Hide
+Makes the window invisible.  While hidden, the window's
 name appears on the bottom of the button 3 menu.  Selecting that item
 brings the window back (unhides it).
 This operation replaces the iconification feature provided by other
@@ -110,7 +98,6 @@ To make
 exit, you have to run
 .B "9wm exit"
 on the command line.  There is no ``exit'' menu item.
-
 
 .SH BUGS
 Is not completely compatible with \*(85.
