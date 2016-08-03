@@ -71,7 +71,7 @@ sigchld(int signum)
 void
 usage(void)
 {
-	fprintf(stderr, "usage: 9wm [-version] [-nostalgia] [-font fname] [-term prog] [exit|restart]\n");
+	fprintf(stderr, "usage: 9wm [-version] [-nostalgia] [-font fname] [-term prog] [-border color] [exit|restart]\n");
 	exit(1);
 }
 
@@ -81,7 +81,7 @@ main(int argc, char *argv[])
 	int i, do_exit, do_restart;
 	char *fname;
 	int shape_event, dummy;
-	char *borderstr = "black";
+	char *borderstr = NULL;
 	myargv = argv;		/* for restart */
 
 	do_exit = do_restart = 0;
@@ -196,14 +196,19 @@ main(int argc, char *argv[])
 	/*
 	 * Setup color for border
 	 */
-	XColor color;
-	Status stpc = XParseColor(dpy,DefaultColormap(dpy,screens[0].num),borderstr,&color);
-	Status stac = XAllocColor(dpy,DefaultColormap(dpy,screens[0].num),&color);
-	if (stpc != 0 && stac != 0)
-		bordercolor = color.pixel;
-	else
-		bordercolor = BlackPixel(dpy,screens[0].num);
-
+	bordercolor = screens[0].black;
+	if (borderstr != NULL) {
+		XColor color;
+		Colormap cmap = DefaultColormap(dpy,screens[0].num);
+		Status stpc;
+		if (cmap != 0)
+			stpc  = XParseColor(dpy,cmap,borderstr,&color);
+		Status stac;
+		if (stpc != 0)
+			stac = XAllocColor(dpy,cmap,&color);
+		if (stac != 0)
+			bordercolor = color.pixel;
+	}
 	/*
 	 * set selection so that 9term knows we're running 
 	 */
