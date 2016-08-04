@@ -92,10 +92,9 @@ main(int argc, char *argv[])
 			nostalgia++;
 		else if (strcmp(argv[i], "-debug") == 0)
 			debug++;
-		else if (strcmp(argv[i], "-font") == 0 && i + 1 < argc) {
-			i++;
-			fname = argv[i];
-		} else if (strcmp(argv[i], "-term") == 0 && i + 1 < argc)
+		else if (strcmp(argv[i], "-font") == 0 && i + 1 < argc)
+			fname = argv[++i];
+		else if (strcmp(argv[i], "-term") == 0 && i + 1 < argc)
 			termprog = argv[++i];
 		else if (strcmp(argv[i], "-version") == 0) {
 			fprintf(stderr, "%s\n", version[0]);
