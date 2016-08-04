@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 multiple authors, see README for licence details
+ * Copyright multiple authors, see README for licence details
  */
 #include <stdio.h>
 #include <signal.h>
@@ -16,7 +16,7 @@
 #include "fns.h"
 
 char *version[] = {
-	"9wm version 1.3.6, Copyright © 2016 multiple authors", 0,
+	"9wm version 1.3.6, Copyright (c) 2016 multiple authors", 0,
 };
 
 Display *dpy;
