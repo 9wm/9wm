@@ -179,7 +179,7 @@ mapreq(XMapRequestEvent * e)
 		/*
 		 * workaround for stupid NCDware 
 		 */
-		fprintf(stderr, "9wm: bad mapreq c %p w %x, rescanning\n", c, (int) e->window);
+		fprintf(stderr, "9wm: bad mapreq c %p w %x, rescanning\n", (void *)c, (int) e->window);
 		for (i = 0; i < num_screens; i++)
 			scanwins(&screens[i]);
 		c = getclient(e->window, 0);

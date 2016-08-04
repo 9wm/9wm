@@ -114,7 +114,7 @@ top(Client *c)
 		}
 		l = &cc->next;
 	}
-	fprintf(stderr, "9wm: %p not on client list in top()\n", c);
+	fprintf(stderr, "9wm: %p not on client list in top()\n", (void *)c);
 }
 
 Client *
