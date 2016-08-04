@@ -199,10 +199,10 @@ main(int argc, char *argv[])
 	if (borderstr != NULL) {
 		XColor color;
 		Colormap cmap = DefaultColormap(dpy,screens[0].num);
-		Status stpc;
+		Status stpc = 0;
 		if (cmap != 0)
 			stpc  = XParseColor(dpy,cmap,borderstr,&color);
-		Status stac;
+		Status stac = 0;
 		if (stpc != 0)
 			stac = XAllocColor(dpy,cmap,&color);
 		if (stac != 0)
