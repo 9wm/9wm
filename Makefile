@@ -1,4 +1,4 @@
-CFLAGS += -DSHAPE -Wall -Werror
+CFLAGS += -DSHAPE -Wall -Werror -pedantic
 LDLIBS = -lXext -lX11
 BIN = $(DESTDIR)/usr/bin/
 
