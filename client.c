@@ -14,7 +14,7 @@ Client *clients;
 Client *current;
 
 void
-setactive(Client *c, int on)
+setactive(Client * c, int on)
 {
 	if (c->parent == c->screen->root) {
 		return;
@@ -31,7 +31,7 @@ setactive(Client *c, int on)
 }
 
 void
-draw_border(Client *c, int active)
+draw_border(Client * c, int active)
 {
 	XSetWindowBackground(dpy, c->parent, active ? bordercolor : c->screen->white);
 	XClearWindow(dpy, c->parent);
@@ -40,7 +40,7 @@ draw_border(Client *c, int active)
 }
 
 void
-active(Client *c)
+active(Client * c)
 {
 	Client *cc;
 
@@ -100,7 +100,7 @@ nofocus(void)
 }
 
 void
-top(Client *c)
+top(Client * c)
 {
 	Client **l, *cc;
 
@@ -114,7 +114,7 @@ top(Client *c)
 		}
 		l = &cc->next;
 	}
-	fprintf(stderr, "9wm: %p not on client list in top()\n", (void *)c);
+	fprintf(stderr, "9wm: %p not on client list in top()\n", (void *) c);
 }
 
 Client *
@@ -156,7 +156,7 @@ getclient(Window w, int create)
 }
 
 void
-rmclient(Client *c)
+rmclient(Client * c)
 {
 	Client *cc;
 

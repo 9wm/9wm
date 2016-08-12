@@ -99,7 +99,7 @@ main(int argc, char *argv[])
 		else if (strcmp(argv[i], "-version") == 0) {
 			fprintf(stderr, "%s\n", version[0]);
 			exit(0);
-		} else if (strcmp(argv[i],"-border") == 0 && i + 1 < argc)
+		} else if (strcmp(argv[i], "-border") == 0 && i + 1 < argc)
 			borderstr = argv[++i];
 		else if (argv[i][0] == '-')
 			usage();
@@ -198,13 +198,13 @@ main(int argc, char *argv[])
 	bordercolor = screens[0].black;
 	if (borderstr != NULL) {
 		XColor color;
-		Colormap cmap = DefaultColormap(dpy,screens[0].num);
+		Colormap cmap = DefaultColormap(dpy, screens[0].num);
 		Status stpc = 0;
 		if (cmap != 0)
-			stpc  = XParseColor(dpy,cmap,borderstr,&color);
+			stpc = XParseColor(dpy, cmap, borderstr, &color);
 		Status stac = 0;
 		if (stpc != 0)
-			stac = XAllocColor(dpy,cmap,&color);
+			stac = XAllocColor(dpy, cmap, &color);
 		if (stac != 0)
 			bordercolor = color.pixel;
 	}

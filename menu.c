@@ -111,7 +111,7 @@ spawn(ScreenInfo * s, char *prog)
 		if (s->display[0] != '\0') {
 			putenv(s->display);
 		}
-		
+
 		if (prog != NULL) {
 			execl(shell, shell, "-c", prog, NULL);
 			fprintf(stderr, "9wm: exec %s", shell);
@@ -146,7 +146,7 @@ reshape(c)
 }
 
 void
-move(Client *c)
+move(Client * c)
 {
 	if (c == 0)
 		return;
