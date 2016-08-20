@@ -45,8 +45,8 @@ The menu has options for:
 Beneath the first 5 items are a list of all hidden windows.
 
 Middle-click anywhere other than the focused window
-to run "mm mouse2".
-It's up to you to write an "mm" program and put it in your path somewhere,
+to run "9wm-mm".
+It's up to you to write an "9wm-mm" program and put it in your path somewhere,
 if you want to use this for something.
 I have mine run "google-chrome-stable --show-app-list".
 

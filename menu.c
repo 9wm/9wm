@@ -64,7 +64,7 @@ button(XButtonEvent * e)
 		if ((e->state & (ShiftMask | ControlMask)) == (ShiftMask | ControlMask)) {
 			menuhit(e, &egg);
 		} else {
-			spawn(s, "mm mouse2");
+			spawn(s, "9wm-mm");
 		}
 		return;
 	default:
