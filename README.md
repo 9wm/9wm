@@ -20,7 +20,7 @@ many folks have done exactly this.
 Where do I get it?
 ==================
 
-The latest version of 9wm is held at <https://github.com/nealey/9wm>
+The latest version of 9wm is held at <https://github.com/9wm/9wm>
 
 
 How do I use it?
@@ -54,7 +54,7 @@ I have mine run "google-chrome-stable --show-app-list".
 What if I find a bug?
 =====================
 
-Please submit it to [Github](https://github.com/nealey/9wm/issues)
+Please submit it to [Github](https://github.com/9wm/9wm/issues)
 If you can fix it, submit the fix as a pull request.
 
 
@@ -96,7 +96,9 @@ Authors
 
 See [the credits](CREDITS.md) for a full list of everybody who's helped.
 
-9wm is maintained by Neale Pickett <neale@woozle.org>.
+9wm is maintained by Jacob Adams <tookmund@gmail.com>.
+
+9wm was maintained by Neale Pickett <neale@woozle.org>.
 
 9wm was written by David Hogan (dhog@cs.su.oz.au), a postgraduate
 student at the Basser Department of Computer Science, University
