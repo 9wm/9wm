@@ -20,7 +20,9 @@ many folks have done exactly this.
 Where do I get it?
 ==================
 
-The latest version of 9wm is held at <https://github.com/9wm/9wm>
+The latest version of 9wm is held at:
+
+<https://github.com/9wm/9wm>
 
 
 How do I use it?
@@ -54,14 +56,15 @@ I have mine run "google-chrome-stable --show-app-list".
 What if I find a bug?
 =====================
 
-Please submit it to [Github](https://github.com/9wm/9wm/issues)
+Please submit it to [Github](https://github.com/9wm/9wm/issues).
+
 If you can fix it, submit the fix as a pull request.
 
 
 Known Problems/Bugs
 ===================
 
-9wm uses ideas from plan9port's `rio`,
+9wm uses ideas from Plan 9's `rio`,
 but is following a different path and is not exactly the same.
 
 In an attempt to avoid ludicrously long window names in the menu,
