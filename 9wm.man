@@ -1,9 +1,7 @@
-.if t .ds 85 8\(12
-.if n .ds 85 8-1/2
 .TH 9wm 1
 
 .SH NAME
-9wm \- \*(85-like Window Manager for X
+9wm \- rio-like Window Manager for X
 .SH SYNOPSIS
 .B 9wm
 [
@@ -30,7 +28,7 @@
 .I 9wm
 is a window manager for X which attempts to emulate the window management
 policies of Plan 9's 
-.I \*(85
+.I rio
 window manager.
 .PP
 .I 9wm
@@ -105,7 +103,8 @@ exit, you have to run
 on the command line.  There is no ``exit'' menu item.
 
 .SH BUGS
-Is not completely compatible with \*(85.
+Is not completely compatible with rio.
+
 .PP
 There is a currently a compiled-in limit of 32 hidden windows.
 .SH "SEE ALSO"
