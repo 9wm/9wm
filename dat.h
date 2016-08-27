@@ -73,20 +73,20 @@ struct Menu {
 };
 
 struct ScreenInfo {
-	int			num;
+	int		num;
 	Window		root;
 	Window		menuwin;
-	Colormap		def_cmap;
-	GC			gc;
+	Colormap	def_cmap;
+	GC		gc;
 	unsigned long	black;
 	unsigned long	white;
-	int			min_cmaps;
+	int		min_cmaps;
 	Cursor		target;
 	Cursor		sweep0;
 	Cursor		boxcurs;
 	Cursor		arrow;
 	Pixmap		root_pixmap;
-	char			display[256];	/* arbitrary limit */
+	char		display[256];	/* arbitrary limit */
 };
 
 // Nostalgia options
@@ -99,20 +99,20 @@ enum {
 /* main.c */
 extern Display		*dpy;
 extern ScreenInfo	*screens;
-extern int			num_screens;
-extern int			initting;
+extern int		num_screens;
+extern int		initting;
 extern XFontStruct	*font;
-extern int			nostalgia;
+extern int		nostalgia;
 extern char		**myargv;
 extern Bool 		shape;
 extern char 		*termprog;
 extern char 		*shell;
 extern char 		*version[];
-extern int			_border;
-extern int			_inset;
-extern int			curtime;
-extern int			debug;
-extern unsigned long		bordercolor;
+extern int		_border;
+extern int		_inset;
+extern int		curtime;
+extern int		debug;
+extern unsigned long	bordercolor;
 
 extern Atom		exit_9wm;
 extern Atom		restart_9wm;
@@ -133,9 +133,9 @@ extern Client		*current;
 
 /* menu.c */
 extern Client		*hiddenc[];
-extern int 			numhidden;
+extern int 		numhidden;
 extern char 		*b3items[];
 extern Menu 		b3menu;
 
 /* error.c */
-extern int 			ignore_badwindow;
+extern int 		ignore_badwindow;
