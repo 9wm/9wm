@@ -11,11 +11,7 @@
 #define MenuMask	(ButtonMask|ButtonMotionMask|ExposureMask)
 #define MenuGrabMask	(ButtonMask|ButtonMotionMask|StructureNotifyMask)
 
-#ifdef	Plan9
-#define DEFSHELL	"/bin/rc"
-#else
 #define DEFSHELL	"/bin/sh"
-#endif
 
 typedef struct Client Client;
 typedef struct Menu Menu;
