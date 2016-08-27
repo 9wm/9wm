@@ -81,6 +81,7 @@ struct ScreenInfo {
 	unsigned long	black;
 	unsigned long	white;
 	unsigned long	active;
+	unsigned long	inactive;
 	int		min_cmaps;
 	Cursor		target;
 	Cursor		sweep0;

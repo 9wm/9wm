@@ -70,12 +70,31 @@ sigchld(int signum)
 void
 usage(void)
 {
-	fprintf(stderr, "usage: 9wm [-version] [-nostalgia] [-font fname] [-term prog] [-border color] [exit|restart]\n");
+	fprintf(stderr, "usage: 9wm [-version] [-nostalgia] [-font fname] [-term prog] [-active color] [-inactive color] [exit|restart]\n");
 	exit(1);
 }
 
 #ifdef COLOR
-	char *borderstr = NULL;
+char *activestr = NULL;
+char *inactivestr = NULL;
+
+unsigned long
+getcolor(Colormap cmap, char *str)
+{
+	fprintf(stderr,"Getting Color %s\n", str);
+	if (str != NULL) {
+		XColor color;
+		Status stpc = 0;
+		if (cmap != 0)
+			stpc = XParseColor(dpy, cmap, str, &color);
+		Status stac = 0;
+		if (stpc != 0)
+			XAllocColor(dpy, cmap, &color);
+		if (stac != 0)
+			return color.pixel;
+	}
+	return 0;
+}
 #endif
 
 int
@@ -101,9 +120,12 @@ main(int argc, char *argv[])
 		else if (strcmp(argv[i], "-version") == 0) {
 			fprintf(stderr, "%s\n", version[0]);
 			exit(0);
-		} else if (strcmp(argv[i], "-border") == 0 && i + 1 < argc) {
+		} else if ( (strcmp(argv[i], "-active") == 0 || strcmp(argv[i], "-inactive") == 0) && i + 1 < argc) {
 #ifdef COLOR
-			borderstr = argv[++i];
+			if(argv[i][1] == 'a')
+				activestr = argv[++i];
+			else
+				inactivestr = argv[++i];
 #else
 			fprintf(stderr,"9wm: border set but COLOR not defined\n");
 			i++;
@@ -250,18 +272,18 @@ initscreen(ScreenInfo * s, int i)
 	 * Setup color for border
 	 */
 	s->active = s->black;
+	s->inactive = s->white;
 #ifdef COLOR
-	if (borderstr != NULL) {
-		XColor color;
-		Colormap cmap = DefaultColormap(dpy, s->num);
-		Status stpc = 0;
-		if (cmap != 0)
-			stpc = XParseColor(dpy, cmap, borderstr, &color);
-		Status stac = 0;
-		if (stpc != 0)
-			stac = XAllocColor(dpy, cmap, &color);
-		if (stac != 0)
-			s->active = color.pixel;
+	if (activestr != NULL || inactivestr != NULL) {
+		Colormap cmap = DefaultColormap(dpy,s->num);
+		if (cmap != 0) {
+			unsigned long active = getcolor(cmap,activestr);
+			if (active != 0)
+				s->active = active;
+			unsigned long inactive = getcolor(cmap,inactivestr);
+			if (inactive != 0)
+				s->inactive = inactive;
+		}
 	}
 #endif
 	gv.foreground = s->black ^ s->white;
