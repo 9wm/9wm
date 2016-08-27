@@ -17,7 +17,10 @@
 .B \-term
 .I termprog
 ] [
-.B \-border
+.B \-active
+.I color
+] [
+.B \-inactive
 .I color
 ] [
 .BR exit | restart
@@ -56,8 +59,10 @@ overriding the default.
 Specifies an alternative program to run when the
 .I New
 menu item is selected.
-.IP "\-border color"
+.IP "\-active color"
 Sets the color of the active window border, which defaults to black.
+.IP "\-inactive color"
+Sets the color of the inactive window border, which defaults to white.
 .IP \-version
 Prints the current version on standard error, then exits.
 
