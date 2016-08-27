@@ -80,6 +80,7 @@ struct ScreenInfo {
 	GC		gc;
 	unsigned long	black;
 	unsigned long	white;
+	unsigned long	active;
 	int		min_cmaps;
 	Cursor		target;
 	Cursor		sweep0;
@@ -112,7 +113,6 @@ extern int		_border;
 extern int		_inset;
 extern int		curtime;
 extern int		debug;
-extern unsigned long	bordercolor;
 
 extern Atom		exit_9wm;
 extern Atom		restart_9wm;

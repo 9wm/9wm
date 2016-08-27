@@ -34,7 +34,6 @@ int curtime;
 int debug;
 int signalled;
 int num_screens;
-unsigned long bordercolor;
 
 Atom exit_9wm;
 Atom restart_9wm;
@@ -75,13 +74,16 @@ usage(void)
 	exit(1);
 }
 
+#ifdef COLOR
+	char *borderstr = NULL;
+#endif
+
 int
 main(int argc, char *argv[])
 {
 	int i, do_exit, do_restart;
 	char *fname;
 	int shape_event, dummy;
-	char *borderstr = NULL;
 	myargv = argv;		/* for restart */
 
 	do_exit = do_restart = 0;
@@ -99,9 +101,14 @@ main(int argc, char *argv[])
 		else if (strcmp(argv[i], "-version") == 0) {
 			fprintf(stderr, "%s\n", version[0]);
 			exit(0);
-		} else if (strcmp(argv[i], "-border") == 0 && i + 1 < argc)
+		} else if (strcmp(argv[i], "-border") == 0 && i + 1 < argc) {
+#ifdef COLOR
 			borderstr = argv[++i];
-		else if (argv[i][0] == '-')
+#else
+			fprintf(stderr,"9wm: border set but COLOR not defined\n");
+			i++;
+#endif
+		} else if (argv[i][0] == '-')
 			usage();
 		else
 			break;
@@ -193,22 +200,6 @@ main(int argc, char *argv[])
 		initscreen(&screens[i], i);
 
 	/*
-	 * Setup color for border
-	 */
-	bordercolor = screens[0].black;
-	if (borderstr != NULL) {
-		XColor color;
-		Colormap cmap = DefaultColormap(dpy, screens[0].num);
-		Status stpc = 0;
-		if (cmap != 0)
-			stpc = XParseColor(dpy, cmap, borderstr, &color);
-		Status stac = 0;
-		if (stpc != 0)
-			stac = XAllocColor(dpy, cmap, &color);
-		if (stac != 0)
-			bordercolor = color.pixel;
-	}
-	/*
 	 * set selection so that 9term knows we're running 
 	 */
 	curtime = CurrentTime;
@@ -255,7 +246,24 @@ initscreen(ScreenInfo * s, int i)
 
 	s->black = BlackPixel(dpy, i);
 	s->white = WhitePixel(dpy, i);
-
+	/*
+	 * Setup color for border
+	 */
+	s->active = s->black;
+#ifdef COLOR
+	if (borderstr != NULL) {
+		XColor color;
+		Colormap cmap = DefaultColormap(dpy, s->num);
+		Status stpc = 0;
+		if (cmap != 0)
+			stpc = XParseColor(dpy, cmap, borderstr, &color);
+		Status stac = 0;
+		if (stpc != 0)
+			stac = XAllocColor(dpy, cmap, &color);
+		if (stac != 0)
+			s->active = color.pixel;
+	}
+#endif
 	gv.foreground = s->black ^ s->white;
 	gv.background = s->white;
 	gv.function = GXxor;
