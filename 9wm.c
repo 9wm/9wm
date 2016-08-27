@@ -81,7 +81,6 @@ char *inactivestr = NULL;
 unsigned long
 getcolor(Colormap cmap, char *str)
 {
-	fprintf(stderr,"Getting Color %s\n", str);
 	if (str != NULL) {
 		XColor color;
 		Status stpc = 0;
@@ -89,9 +88,10 @@ getcolor(Colormap cmap, char *str)
 			stpc = XParseColor(dpy, cmap, str, &color);
 		Status stac = 0;
 		if (stpc != 0)
-			XAllocColor(dpy, cmap, &color);
-		if (stac != 0)
+			stac = XAllocColor(dpy, cmap, &color);
+		if (stac != 0) {
 			return color.pixel;
+		}
 	}
 	return 0;
 }
