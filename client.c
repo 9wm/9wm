@@ -145,9 +145,6 @@ getclient(Window w, int create)
 	c->cmap = None;
 	c->label = c->class = 0;
 	c->revert = 0;
-#ifdef NINETERM
-	c->is9term = 0;
-#endif
 	c->hold = 0;
 	c->ncmapwins = 0;
 	c->cmapwins = 0;

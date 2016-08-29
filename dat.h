@@ -37,9 +37,6 @@ struct Client {
 	int 		state;
 	int 		init;
 	int 		reparenting;
-#ifdef NINETERM
-	int 		is9term;
-#endif
 	int 		hold;
 	int 		proto;
 

@@ -245,14 +245,6 @@ sweepcalc(Client * c, int x, int y)
 
 	dx -= 2 * BORDER;
 	dy -= 2 * BORDER;
-#ifdef NINETERM
-	if (!c->is9term) {
-		if (dx < c->min_dx)
-			dx = c->min_dx;
-		if (dy < c->min_dy)
-			dy = c->min_dy;
-	}
-#endif
 	if (c->size.flags & PResizeInc) {
 		dx = c->min_dx + (dx - c->min_dx) / c->size.width_inc * c->size.width_inc;
 		dy = c->min_dy + (dy - c->min_dy) / c->size.height_inc * c->size.height_inc;

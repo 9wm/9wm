@@ -30,15 +30,9 @@ manage(Client * c, int mapped)
 	if (XGetClassHint(dpy, c->window, &class) != 0) {	/* ``Success'' */
 		c->instance = class.res_name;
 		c->class = class.res_class;
-#ifdef NINETERM
-		c->is9term = (strcmp(c->class, "9term") == 0);
-#endif
 	} else {
 		c->instance = 0;
 		c->class = 0;
-#ifdef NINETERM
-		c->is9term = 0;
-#endif
 	}
 	c->iconname = getprop(c->window, XA_WM_ICON_NAME);
 	c->name = getprop(c->window, XA_WM_NAME);
@@ -51,10 +45,7 @@ manage(Client * c, int mapped)
 	getcmaps(c);
 	getproto(c);
 	gettrans(c);
-#ifdef NINETERM
-	if (c->is9term)
-		c->hold = getiprop(c->window, _9wm_hold_mode);
-#endif
+
 	/*
 	 * Figure out what to do with the window from hints 
 	 */
@@ -78,21 +69,12 @@ manage(Client * c, int mapped)
 		if (c->trans != None)
 			doreshape = 0;
 	}
-#ifdef NINETERM
-	if (c->is9term)
-		fixsize = 0;
-#endif
 	if (c->size.flags & PBaseSize) {
 		c->min_dx = c->size.base_width;
 		c->min_dy = c->size.base_height;
 	} else if (c->size.flags & PMinSize) {
 		c->min_dx = c->size.min_width;
 		c->min_dy = c->size.min_height;
-#ifdef NINETERM
-	} else if (c->is9term) {
-		c->min_dx = 100;
-		c->min_dy = 50;
-#endif
 	} else
 		c->min_dx = c->min_dy = 0;
 
