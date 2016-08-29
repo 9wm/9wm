@@ -5,7 +5,10 @@
 .SH SYNOPSIS
 .B 9wm
 [
-.B \-nostalgia
+.B \-border
+] [
+.B \-cursor
+.I cursor
 ] [
 .B \-version
 ] [
@@ -43,9 +46,13 @@ Unlike other X window managers, 9wm implements `mouse focus': mouse events
 are sent only to the current window.
 
 .SH OPTIONS
-.IP \-nostalgia
-Makes the cursor like Plan9's cursor.
-If passed twice, it will also shrink the size of the window borders.
+.IP \-border
+Shrinks the size of window borders to be more like Plan9.
+.IP "\-cursor cursor"
+Sets the cursor to one of two custom Plan9-style cursors:
+.IR v1
+or
+.IR blit.
 Use this option for maximum authenticity.
 .IP "\-font fname"
 Sets the font in
