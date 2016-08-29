@@ -135,7 +135,7 @@ manage(Client * c, int mapped)
 	else {
 		XMapWindow(dpy, c->window);
 		XMapWindow(dpy, c->parent);
-		if (nostalgia || doreshape)
+		if (doreshape)
 			active(c);
 		else if (c->trans != None && current && current->window == c->trans)
 			active(c);

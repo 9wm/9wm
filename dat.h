@@ -99,7 +99,7 @@ extern ScreenInfo	*screens;
 extern int		num_screens;
 extern int		initting;
 extern XFontStruct	*font;
-extern int		nostalgia;
+extern int 		curs;
 extern char		**myargv;
 extern Bool 		shape;
 extern char 		*termprog;

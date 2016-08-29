@@ -23,7 +23,8 @@ Display *dpy;
 ScreenInfo *screens;
 int initting;
 XFontStruct *font;
-int nostalgia;
+int curs;
+int border;
 char **myargv;
 char *termprog;
 char *shell;
@@ -70,7 +71,7 @@ sigchld(int signum)
 void
 usage(void)
 {
-	fprintf(stderr, "usage: 9wm [-version] [-nostalgia] [-font fname] [-term prog] [-active color] [-inactive color] [exit|restart]\n");
+	fprintf(stderr, "usage: 9wm [-version] [-curs cursor] [-border] [-font fname] [-term prog] [-active color] [-inactive color] [exit|restart]\n");
 	exit(1);
 }
 
@@ -109,9 +110,7 @@ main(int argc, char *argv[])
 	font = 0;
 	fname = 0;
 	for (i = 1; i < argc; i++)
-		if (strcmp(argv[i], "-nostalgia") == 0)
-			nostalgia++;
-		else if (strcmp(argv[i], "-debug") == 0)
+		if (strcmp(argv[i], "-debug") == 0)
 			debug++;
 		else if (strcmp(argv[i], "-font") == 0 && i + 1 < argc)
 			fname = argv[++i];
@@ -120,6 +119,14 @@ main(int argc, char *argv[])
 		else if (strcmp(argv[i], "-version") == 0) {
 			fprintf(stderr, "%s\n", version[0]);
 			exit(0);
+		} else if (strcmp(argv[i],"-border") == 0)
+			border++;
+		else if (strcmp(argv[i],"-curs")  == 0 && i + 1 < argc) {
+			i++;
+			if (strcmp(argv[i],"v1") == 0)
+				curs = 1;
+			else if (strcmp(argv[i],"blit") == 0)
+				curs = 2;
 		} else if ( (strcmp(argv[i], "-active") == 0 || strcmp(argv[i], "-inactive") == 0) && i + 1 < argc) {
 #ifdef COLOR
 			if(argv[i][1] == 'a')
@@ -207,7 +214,7 @@ main(int argc, char *argv[])
 				break;
 		}
 	}
-	if (nostalgia == BLIT) {
+	if (border) {
 		_border--;
 		_inset--;
 	}

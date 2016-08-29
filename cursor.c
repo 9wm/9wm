@@ -152,14 +152,14 @@ initcurs(ScreenInfo * s)
 	XAllocNamedColor(dpy, DefaultColormap(dpy, s->num), "black", &bl, &dummy);
 	XAllocNamedColor(dpy, DefaultColormap(dpy, s->num), "white", &wh, &dummy);
 
-	switch (nostalgia) {
-	case BLIT:
+	switch (curs) {
+	case 2:
 		s->arrow = getcursor(&blitarrow, s);
 		s->target = getcursor(&blittarget, s);
 		s->sweep0 = getcursor(&blitsweep, s);
 		s->boxcurs = getcursor(&blitsweep, s);
 		break;
-	case V1:
+	case 1:
 		s->arrow = getcursor(&arrowdata, s);
 		s->target = getcursor(&sightdata, s);
 		s->sweep0 = getcursor(&sweep0data, s);
