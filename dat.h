@@ -1,4 +1,6 @@
-/* Copyright (c) 1994-1996 David Hogan, see README for licence details */
+/*
+ * Copyright multiple authors, see README for licence details
+ */
 
 #define BORDER		_border
 #define	INSET		_inset

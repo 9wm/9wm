@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 multiple authors, see README for licence details 
+ * Copyright multiple authors, see README for licence details
  */
 #include <stdio.h>
 #include <signal.h>

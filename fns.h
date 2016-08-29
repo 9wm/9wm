@@ -1,4 +1,6 @@
-/* Copyright (c) 1994-1996 David Hogan, see README for licence details */
+/*
+ * Copyright multiple authors, see README for licence details
+ */
 
 #ifdef	DEBUG
 #define	trace(s, c, e)	dotrace((s), (c), (e))
