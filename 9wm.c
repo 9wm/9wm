@@ -71,7 +71,7 @@ sigchld(int signum)
 void
 usage(void)
 {
-	fprintf(stderr, "usage: 9wm [-version] [-curs cursor] [-border] [-font fname] [-term prog] [-active color] [-inactive color] [exit|restart]\n");
+	fprintf(stderr, "usage: 9wm [-version] [-cursor cursor] [-border] [-font fname] [-term prog] [-active color] [-inactive color] [exit|restart]\n");
 	exit(1);
 }
 
@@ -121,7 +121,7 @@ main(int argc, char *argv[])
 			exit(0);
 		} else if (strcmp(argv[i],"-border") == 0)
 			border++;
-		else if (strcmp(argv[i],"-curs")  == 0 && i + 1 < argc) {
+		else if (strcmp(argv[i],"-cursor")  == 0 && i + 1 < argc) {
 			i++;
 			if (strcmp(argv[i],"v1") == 0)
 				curs = 1;
