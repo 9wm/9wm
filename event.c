@@ -318,6 +318,14 @@ clientmesg(XClientMessageEvent * e)
 		Client *c = getclient(e->window, 0);
 		move(c);
 		return;
+	} else if (e->message_type == net_wm_state) {
+		if (e->data.l[1] == net_wm_state_fullscreen || e->data.l[2] == net_wm_state_fullscreen) {
+			if (e->data.l[0] == 1)
+				XChangeProperty(dpy, e->window, net_wm_state, XA_ATOM, 32, PropModeReplace, (unsigned char *)&net_wm_state_fullscreen, 1);
+			else if (e->data.l[0] == 0)
+				XDeleteProperty(dpy, e->window, net_wm_state);
+		}
+		return;
 	} else if (e->message_type == active_window) {
 		Client *c = getclient(e->window, 0);
 		XMapRaised(dpy, c->parent);

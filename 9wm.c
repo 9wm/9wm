@@ -45,6 +45,8 @@ Atom wm_delete;
 Atom wm_take_focus;
 Atom wm_colormaps;
 Atom wm_moveresize;
+Atom net_wm_state;
+Atom net_wm_state_fullscreen;
 Atom active_window;
 Atom utf8_string;
 Atom _9wm_running;
@@ -193,6 +195,8 @@ main(int argc, char *argv[])
 	wm_colormaps = XInternAtom(dpy, "WM_COLORMAP_WINDOWS", False);
 	wm_moveresize = XInternAtom(dpy, "_NET_WM_MOVERESIZE", False);
 	active_window = XInternAtom(dpy, "_NET_ACTIVE_WINDOW", False);
+	net_wm_state = XInternAtom(dpy, "_NET_WM_STATE",False);
+	net_wm_state_fullscreen = XInternAtom(dpy, "_NET_WM_STATE_FULLSCREEN", False);
 	utf8_string = XInternAtom(dpy, "UTF8_STRING", False);
 	_9wm_running = XInternAtom(dpy, "_9WM_RUNNING", False);
 	_9wm_hold_mode = XInternAtom(dpy, "_9WM_HOLD_MODE", False);

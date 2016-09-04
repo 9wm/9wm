@@ -124,6 +124,8 @@ extern Atom 		wm_colormaps;
 extern Atom		utf8_string;
 extern Atom		wm_moveresize;
 extern Atom		active_window;
+extern Atom		net_wm_state;
+extern Atom		net_wm_state_fullscreen;
 
 /* client.c */
 extern Client		*clients;
