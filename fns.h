@@ -8,6 +8,10 @@
 #define	trace(s, c, e)
 #endif
 
+#ifdef DEBUG_EV
+void ShowEvent(XEvent *eev);
+#endif
+
 /* 9wm.c */
 void	usage();
 void	initscreen();
