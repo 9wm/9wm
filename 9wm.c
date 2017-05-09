@@ -36,6 +36,11 @@ int debug;
 int signalled;
 int num_screens;
 
+#ifdef COLOR
+char *activestr;
+char *inactivestr;
+#endif
+
 Atom exit_9wm;
 Atom restart_9wm;
 Atom wm_state;
@@ -78,11 +83,8 @@ usage(void)
 }
 
 #ifdef COLOR
-char *activestr = NULL;
-char *inactivestr = NULL;
-
-unsigned long
-getcolor(Colormap cmap, char *str)
+Status
+getcolor(Colormap cmap, unsigned long *pixel, char *str)
 {
 	if (str != NULL) {
 		XColor color;
@@ -93,7 +95,8 @@ getcolor(Colormap cmap, char *str)
 		if (stpc != 0)
 			stac = XAllocColor(dpy, cmap, &color);
 		if (stac != 0) {
-			return color.pixel;
+			*pixel = color.pixel;
+			return 1;
 		}
 	}
 	return 0;
@@ -288,11 +291,13 @@ initscreen(ScreenInfo * s, int i)
 	if (activestr != NULL || inactivestr != NULL) {
 		Colormap cmap = DefaultColormap(dpy,s->num);
 		if (cmap != 0) {
-			unsigned long active = getcolor(cmap,activestr);
-			if (active != 0)
+			unsigned long active;
+			Status sa = getcolor(cmap, &active, activestr);
+			if (sa != 0)
 				s->active = active;
-			unsigned long inactive = getcolor(cmap,inactivestr);
-			if (inactive != 0)
+			unsigned long inactive;
+			Status si = getcolor(cmap, &inactive, inactivestr);
+			if (si != 0)
 				s->inactive = inactive;
 		}
 	}
