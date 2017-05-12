@@ -1,14 +1,14 @@
 9wm
 ====
 
-9wm is an X11 window manager inspired by the Plan 9 window manager 8½.
+9wm is an X11 window manager inspired by the Plan 9 window manager 8½, also known as rio.
 It provides a very simple and clean user interface.
 It is click-to-type.
 It uses the X11 font system (which, unfortunately, means no Unicode support).
 
 9wm does not provide virtual desktops, customization, key bindings,
 EWMH support, or compositing.
-It does not allocate any colors,
+It does not allocate any colors (if you disable COLOR),
 which will be great news if you are stuck in 1993.
 
 It is a great place to start if you are interested in writing a window manager from scratch:
