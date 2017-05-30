@@ -1,8 +1,9 @@
 CFLAGS += -DSHAPE -DCOLOR -Wall -Werror -pedantic
 LDLIBS = -lXext -lX11
-BIN = $(DESTDIR)/usr/bin/
+PREFIX ?= /usr
+BIN = $(DESTDIR)$(PREFIX)/bin
 
-MANDIR = $(DESTDIR)/usr/share/man/man1
+MANDIR = $(DESTDIR)$(PREFIX)/share/man/man1
 MANSUFFIX = 1
 
 all: 9wm
