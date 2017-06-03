@@ -4,6 +4,12 @@ People Who've Helped
 Thanks to the late David Hogan for writing 9wm!
 
 
+tookmund's acknowledgements
+---------------------------------
+
+* Ricardo Fabian Peliquero <zhana@lasampa.com.ar> has contributed many bug reports to fix things I overlooked
+* Benny Siegert contributed a patch to add PREFIX support to 9wm's Makefile
+
 neale's acknowledgements
 ---------------------------------
 
