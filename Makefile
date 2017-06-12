@@ -1,4 +1,4 @@
-CFLAGS += -DSHAPE -DCOLOR -Wall -Werror -pedantic
+CFLAGS += -DDEBUG -DSHAPE -DCOLOR -Wall -Werror
 LDLIBS = -lXext -lX11
 PREFIX ?= /usr
 BIN = $(DESTDIR)$(PREFIX)/bin
