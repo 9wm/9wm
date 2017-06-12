@@ -76,13 +76,11 @@ Prints the current version on standard error, then exits.
 A menu of window operations is available by pressing button 3
 outside the current window.
 .IP New
-attempts to spawn a
-.I 9term
-process (or
+attempts to spawn an
 .I xterm
-if
-.I 9term
-is not available).
+process (unless the
+.B \-term
+argument is used).
 .PP
 All of the next operations change the cursor into a target, prompting the user
 to click button 3 on one of the windows to select it for the operation.
