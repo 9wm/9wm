@@ -10,7 +10,7 @@ Allows nonrectangular windows, but requires the X11 shape extension, which every
 Enables the color parsing code for customizing window borders. 
 
 * DEBUG
-Enables debugging code. Without this enabled -debug does nothing.
+Enables debugging code. Without this enabled -debug does very little.
 
 * DEBUG_EV
 Enables event debugging code, requires X11 event parsing code that can be found in the showevent branch 
