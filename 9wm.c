@@ -115,13 +115,12 @@ main(int argc, char *argv[])
 	font = 0;
 	fname = 0;
 	for (i = 1; i < argc; i++)
-		if (strcmp(argv[i], "-debug") == 0)
+		if (strcmp(argv[i], "-debug") == 0) {
 			debug++;
 #ifndef DEBUG
-		fprintf(stderr,"9wm: WARNING! debug option enabled but debug code not compiled in!\nDebug info
-				may not be complete!\n");
+		fprintf(stderr,"9wm: WARNING! debug option enabled but debug code not compiled in!\nDebug info may not be complete!\n");
 #endif
-		else if (strcmp(argv[i], "-font") == 0 && i + 1 < argc)
+		} else if (strcmp(argv[i], "-font") == 0 && i + 1 < argc)
 			fname = argv[++i];
 		else if (strcmp(argv[i], "-term") == 0 && i + 1 < argc)
 			termprog = argv[++i];
