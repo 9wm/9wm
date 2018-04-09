@@ -89,9 +89,9 @@ getcolor(Colormap cmap, unsigned long *pixel, char *str)
 	if (str != NULL) {
 		XColor color;
 		Status stpc = 0;
+		Status stac = 0;
 		if (cmap != 0)
 			stpc = XParseColor(dpy, cmap, str, &color);
-		Status stac = 0;
 		if (stpc != 0)
 			stac = XAllocColor(dpy, cmap, &color);
 		if (stac != 0) {
@@ -295,10 +295,10 @@ initscreen(ScreenInfo * s, int i)
 		Colormap cmap = DefaultColormap(dpy,s->num);
 		if (cmap != 0) {
 			unsigned long active;
+			unsigned long inactive;
 			Status sa = getcolor(cmap, &active, activestr);
 			if (sa != 0)
 				s->active = active;
-			unsigned long inactive;
 			Status si = getcolor(cmap, &inactive, inactivestr);
 			if (si != 0)
 				s->inactive = inactive;
