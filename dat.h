@@ -88,7 +88,7 @@ struct ScreenInfo {
 	char		display[256];	/* arbitrary limit */
 };
 
-// Nostalgia options
+/* Nostalgia options */
 enum {
 	MODERN = 0,
 	V1,
