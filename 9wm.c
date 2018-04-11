@@ -297,9 +297,9 @@ initscreen(ScreenInfo * s, int i)
 			unsigned long active;
 			unsigned long inactive;
 			Status sa = getcolor(cmap, &active, activestr);
+			Status si = getcolor(cmap, &inactive, inactivestr);
 			if (sa != 0)
 				s->active = active;
-			Status si = getcolor(cmap, &inactive, inactivestr);
 			if (si != 0)
 				s->inactive = inactive;
 		}
