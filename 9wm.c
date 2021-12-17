@@ -70,12 +70,6 @@ char *fontlist[] = {
 };
 
 void
-sigchld(int signum)
-{
-	while (0 < waitpid(-1, NULL, WNOHANG));
-}
-
-void
 usage(void)
 {
 	fprintf(stderr, "usage: 9wm [-version] [-cursor cursor] [-border] [-font fname] [-term prog] [-active color] [-inactive color] [exit|restart]\n");
@@ -176,7 +170,7 @@ main(int argc, char *argv[])
 		signal(SIGINT, SIG_IGN);
 	if (signal(SIGHUP, sighandler) == SIG_IGN)
 		signal(SIGHUP, SIG_IGN);
-	signal(SIGCHLD, sigchld);
+	signal(SIGCHLD, SIG_IGN);
 
 	exit_9wm = XInternAtom(dpy, "9WM_EXIT", False);
 	restart_9wm = XInternAtom(dpy, "9WM_RESTART", False);
