@@ -176,7 +176,12 @@ main(int argc, char *argv[])
 		signal(SIGINT, SIG_IGN);
 	if (signal(SIGHUP, sighandler) == SIG_IGN)
 		signal(SIGHUP, SIG_IGN);
-	signal(SIGCHLD, sigchld);
+	{
+		struct sigaction act = {0};
+
+		act.sa_handler = sigchld;
+		sigaction(SIGCHLD, &act, NULL);
+	}
 
 	exit_9wm = XInternAtom(dpy, "9WM_EXIT", False);
 	restart_9wm = XInternAtom(dpy, "9WM_RESTART", False);
