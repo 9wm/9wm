@@ -15,7 +15,7 @@ neale's acknowledgements
 
 * Jacob Adams <tookmund@gmail.com> has contributed many patches to further modernize building
 * Dave Conroy <dgc@fpgaretrocomputing.org> contributed a patch to fix event handling with xforms-toolkit
-* <circl-lastname@gmail.com> patiently helped me chase down the correct solution to bug #16
+* <circl.lastname@gmail.com> patiently helped me chase down the correct solution to bug #16
 
 
 dhog's acknowledgements
