@@ -1,24 +1,20 @@
-CFLAGS += -DSHAPE -DCOLOR -Wall -pedantic -ansi -D_XOPEN_SOURCE
-LDLIBS = -lXext -lX11
-PREFIX ?= /usr
-BIN = $(DESTDIR)$(PREFIX)/bin
+include config.mk
 
-MANDIR = $(DESTDIR)$(PREFIX)/share/man/man1
-MANSUFFIX = 1
+OBJ = 9wm.o event.o manage.o menu.o client.o grab.o cursor.o error.o
 
-all: 9wm
-
-9wm: 9wm.o event.o manage.o menu.o client.o grab.o cursor.o error.o
+9wm: ${OBJ}
+	${CC} $^ ${LDLIBS} -o $@ 
 
 install: 9wm
-	mkdir -p $(BIN)
-	cp 9wm $(BIN)/9wm
+	mkdir -p ${BIN}
+	cp -f $< ${BIN}/$<
+	mkdir -p ${MANDIR}
+	cp -f $<.man ${MANDIR}/$<.1
 
-install.man:
-	mkdir -p $(MANDIR)
-	cp 9wm.man $(MANDIR)/9wm.$(MANSUFFIX)
-
-$(OBJS): $(HFILES)
+uninstall:
+	rm -f ${MANDIR}/9wm.1 ${BIN}/9wm
 
 clean:
-	rm -f 9wm *.o
+	rm -f 9wm ${OBJ} 
+
+.PHONY: 9wm install uninstall clean
