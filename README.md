@@ -11,7 +11,7 @@ It is a great place to start if you are interested in writing a window manager f
 
 `9wm` is distributed under [an MIT License](LICENSE.md).
 
-# Install
+## Install
 
 The latest version of 9wm is held at: <https://github.com/9wm/9wm>
 
@@ -29,7 +29,7 @@ To use `startx`, you'll need to include the following line at the end of your `.
 exec 9wm # ... options
 ```
 
-# Usage
+## Usage
 
 You can right-click anywhere other than the focused window — including in any non-focused window — to bring up a menu. 
 
@@ -46,7 +46,7 @@ Left-click a non-focused window (white border) to focus it. If you didn't overwr
 
 Middle-click anywhere other than the focused window to run "9wm-mm". It's up to you to write an "9wm-mm" program and put it in your path somewhere, if you want to use this for something. I have mine run "google-chrome-stable --show-app-list".
 
-# Help
+## Help
 
 `9wm` has an extensive man page you can consult for more information:
 
@@ -54,7 +54,7 @@ Middle-click anywhere other than the focused window to run "9wm-mm". It's up to 
 $ man 9wm
 ```
 
-# Bugs
+## Bugs
 
 Find a bug? Please, submit it to [issues]. If you can fix it, submit the fix as a pull request.
 
@@ -91,7 +91,7 @@ Lack of EWMH means some applications (especially games) will break when
 trying to go fullscreen.
 
 
-# Authors
+## Authors
 
 See the [CREDITS.md](CREDITS.md) for a full list of everybody who's helped.
 
